@@ -1,8 +1,7 @@
 # d2l-labs-attachment
 
-[![NPM version](https://img.shields.io/npm/v/@brightspace-ui-labs/attachment.svg)](https://www.npmjs.org/package/@brightspace-ui-labs/attachment)
-[![Greenkeeper badge](https://badges.greenkeeper.io/BrightspaceUILabs/attachment.svg)](https://greenkeeper.io/)
-[![Build status](https://travis-ci.com/@brightspace-ui-labs/attachment.svg?branch=master)](https://travis-ci.com/@brightspace-ui-labs/attachment)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Brightspace/attachment.svg)](https://greenkeeper.io/)
+[![Build status](https://travis-ci.com/@brightspace/attachment.svg?branch=master)](https://travis-ci.com/@brightspace/attachment)
 
 > Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
 >
@@ -22,38 +21,35 @@ Activity attachments
 
 ## Installation
 
-To install from NPM:
+To install from github:
 
 ```shell
-npm install @brightspace-ui-labs/attachment
+npm install @brightspace/attachment
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-    import '@brightspace-ui-labs/attachment/attachment.js';
+    import '@brightspace/attachment/components/attachment.js';
 </script>
-<d2l-labs-attachment>My element</d2l-labs-attachment>
+<d2l-labs-attachment></d2l-labs-attachment>
 ```
+
+TODO - Show usage examples
 
 ## Developing, Testing and Contributing
 
 After cloning the repo, run `npm install` to install dependencies.
 
-If you don't have it already, install the [Polymer CLI](https://www.polymer-project.org/3.0/docs/tools/polymer-cli) globally:
-
-```shell
-npm install -g polymer-cli
-```
-
 ### Running the demos
 
-To start a [local web server](https://www.polymer-project.org/3.0/docs/tools/polymer-cli-commands#serve) that hosts the demo page and tests:
+To start a local web server that hosts stories (demos) written using [Storybook](https://storybook.js.org/):
 
 ```shell
-polymer serve
+npm run storybook
 ```
+
 
 ### Testing
 
@@ -75,38 +71,8 @@ To lint AND run local unit tests:
 npm test
 ```
 
-[ci-url]: https://travis-ci.org/BrightspaceUILabs/attachment
-[ci-image]: https://travis-ci.org/BrightspaceUILabs/attachment.svg?branch=master
-
-### Running the demos
-
-To start a [local web server](https://www.polymer-project.org/3.0/docs/tools/polymer-cli-commands#serve) that hosts the demo page and tests:
-
-```shell
-polymer serve
-```
-
-### Testing
-
-To lint:
-
-```shell
-npm run lint
-```
-
-To run local unit tests:
-
-```shell
-npm run test:local
-```
-
-To run a subset of local unit tests, modify your local [index.html](https://github.com/BrightspaceUILabs/attachment/blob/master/test/index.html), or start the dev server and navigate to the desired test page.
-
-To run linting and unit tests:
-
-```shell
-npm test
-```
+[ci-url]: https://travis-ci.org/Brightspace/attachment
+[ci-image]: https://travis-ci.org/Brightspace/attachment.svg?branch=master
 
 ## Versioning, Releasing & Deploying
 
