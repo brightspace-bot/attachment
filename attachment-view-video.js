@@ -1,14 +1,16 @@
 import { css, html, LitElement } from 'lit-element';
 import { BaseMixin } from './base-mixin.js';
+import { PendingMixin } from './pending-mixin.js';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { viewStyles } from './attachment-view-styles.js';
 
-export class AttachmentViewVideo extends BaseMixin(LitElement) {
+export class AttachmentViewVideo extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			url: { type: String },
 			src: { type: String },
 			thumbnailUrl: {type: String },
-			_backgroundColor: {type: String },
+			_style: {type: Object },
 			_thumbnailImageLoaded: { type: Boolean }
 		};
 	}
@@ -115,28 +117,14 @@ export class AttachmentViewVideo extends BaseMixin(LitElement) {
 		this._thumbnailImageLoaded = false;
 	}
 
-	_loaded() {
-		this._pendingResolve();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-
+	_loaded(e) {
+		super._loaded(e);
 		if (this.src) {
 			// If video is not 16x9, this will cover any blank space in the iFrame with black
-			this._backgroundColor = '#000';
+			this._style = {
+				backgroundColor: '#000'
+			};
 		}
-	}
-
-	_errored(e) {
-		this._pendingReject();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-		this.dispatchEvent(
-			new CustomEvent('error', {
-				composed: true,
-				bubbles: true,
-				detail: e,
-			}),
-		);
 	}
 
 	_onThumbnailLoaded() {
@@ -147,44 +135,28 @@ export class AttachmentViewVideo extends BaseMixin(LitElement) {
 		window.open(this.url, '_blank');
 	}
 
-	firstUpdated() {
-		const pendingPromise = new Promise((resolve, reject) => {
-			this._pendingResolve = resolve;
-			this._pendingReject = reject;
-		});
-
-		const pendingEvent = new CustomEvent('d2l-pending-state', {
-			composed: true,
-			bubbles: true,
-			detail: { promise: pendingPromise },
-		});
-		this.dispatchEvent(pendingEvent);
-	}
-
 	render() {
 		return html`
 			<div id="content">
-				${this.src ? html`
-					<div id="video-container">
-						<div class="small-screen thumbnail-wrapper" ?hidden="${!this._thumbnailImageLoaded}" @click="${this._onThumbnailTap}">
-							<button>
-								<img id="video-thumbnail" @load="${this._onThumbnailLoaded}" src="${this.thumbnailUrl}"
-									aria-label="${this.localize('aria_video_thumbnail')}"
-									alt="${this.localize('video_thumbnail')}">
-								<div>
-									<img class="thumbnail-play" ?hidden="${!this._thumbnailImageLoaded}" src="${this.constructor.resolveUrl('icons/thumbnail-play.svg')}">
-								</div>
-							</button>
-						</div>
-						<iframe class="big-screen" src="${this.src}"
-							@load="${this._loaded}"
-							@error="${this._errored}"
-							frameborder="0" gesture="media" allowfullscreen=""
-							aria-label="${this.localize('video_player')}"
-							style="background-color: '${this._backgroundColor}'">
-						</iframe>
+				<div id="video-container">
+					<div class="small-screen thumbnail-wrapper" ?hidden="${!this._thumbnailImageLoaded}" @click="${this._onThumbnailTap}">
+						<button>
+							<img id="video-thumbnail" @load="${this._onThumbnailLoaded}" src="${this.thumbnailUrl}"
+								aria-label="${this.localize('aria_video_thumbnail')}"
+								alt="${this.localize('video_thumbnail')}">
+							<div>
+								<img class="thumbnail-play" ?hidden="${!this._thumbnailImageLoaded}" src="${this.constructor.resolveUrl('icons/thumbnail-play.svg')}">
+							</div>
+						</button>
 					</div>
-				` : html``}
+					<iframe class="big-screen" src="${this.src}"
+						@load="${this._loaded}"
+						@error="${this._errored}"
+						frameborder="0" gesture="media" allowfullscreen=""
+						aria-label="${this.localize('video_player')}"
+						style="${styleMap(this._style)}">
+					</iframe>
+				</div>
 				<div id="info">
 					<slot></slot>
 				</div>

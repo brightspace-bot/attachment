@@ -1,14 +1,16 @@
 import { css, html, LitElement } from 'lit-element';
 import { BaseMixin } from './base-mixin.js';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
+import { PendingMixin } from './pending-mixin.js';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { viewStyles } from './attachment-view-styles.js';
 
-export class AttachmentViewImage extends BaseMixin(LitElement) {
+export class AttachmentViewImage extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			src: { type: String },
 			name: { type: String },
-			_width: { type: Number },
+			_style: { type: Object },
 		};
 	}
 
@@ -73,11 +75,6 @@ export class AttachmentViewImage extends BaseMixin(LitElement) {
 		];
 	}
 
-	constructor() {
-		super();
-		this._width = 0;
-	}
-
 	get name() {
 		return this._name || decodeURI(this.src.substr(this.src.lastIndexOf('/') + 1));
 	}
@@ -89,45 +86,18 @@ export class AttachmentViewImage extends BaseMixin(LitElement) {
 	}
 
 	_loaded(e) {
-		this._pendingResolve();
-		this._pendingReject = null;
-		this._pendingResolve = null;
+		super._loaded(e);
 
 		if (e.target) {
-			this._width = e.target.naturalWidth;
+			this._style = {
+				width: `${e.target.naturalWidth}px`
+			};
 		}
-	}
-
-	_errored(e) {
-		this._pendingReject();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-		this.dispatchEvent(
-			new CustomEvent('error', {
-				composed: true,
-				bubbles: true,
-				detail: e,
-			}),
-		);
-	}
-
-	firstUpdated() {
-		const pendingPromise = new Promise((resolve, reject) => {
-			this._pendingResolve = resolve;
-			this._pendingReject = reject;
-		});
-
-		const pendingEvent = new CustomEvent('d2l-pending-state', {
-			composed: true,
-			bubbles: true,
-			detail: { promise: pendingPromise },
-		});
-		this.dispatchEvent(pendingEvent);
 	}
 
 	render() {
 		return html`
-			<div id="content" style="width: ${this._width}px">
+			<div id="content" style="${styleMap(this._style)}">
 				<img
 					src="${this.src}"
 					@load="${this._loaded}"

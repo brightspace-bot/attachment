@@ -1,8 +1,9 @@
 import { css, html, LitElement } from 'lit-element';
 import { BaseMixin } from './base-mixin.js';
+import { PendingMixin } from './pending-mixin.js';
 import { viewStyles } from './attachment-view-styles.js';
 
-export class AttachmentViewImageLink extends BaseMixin(LitElement) {
+export class AttachmentViewImageLink extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			src: { type: String },
@@ -81,39 +82,6 @@ export class AttachmentViewImageLink extends BaseMixin(LitElement) {
 				}
 			`,
 		];
-	}
-
-	_loaded() {
-		this._pendingResolve();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-	}
-
-	_errored(e) {
-		this._pendingReject();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-		this.dispatchEvent(
-			new CustomEvent('error', {
-				composed: true,
-				bubbles: true,
-				detail: e,
-			}),
-		);
-	}
-
-	firstUpdated() {
-		const pendingPromise = new Promise((resolve, reject) => {
-			this._pendingResolve = resolve;
-			this._pendingReject = reject;
-		});
-
-		const pendingEvent = new CustomEvent('d2l-pending-state', {
-			composed: true,
-			bubbles: true,
-			detail: { promise: pendingPromise },
-		});
-		this.dispatchEvent(pendingEvent);
 	}
 
 	render() {

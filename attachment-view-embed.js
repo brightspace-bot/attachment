@@ -1,16 +1,16 @@
 import { css, html, LitElement } from 'lit-element';
 import { BaseMixin } from './base-mixin.js';
-import { ifDefined } from 'lit-html/directives/if-defined.js';
+import { PendingMixin } from './pending-mixin.js';
+import { styleMap } from 'lit-html/directives/style-map.js';
 import { viewStyles } from './attachment-view-styles.js';
 
-export class AttachmentViewEmbed extends BaseMixin(LitElement) {
+export class AttachmentViewEmbed extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			src: { type: String },
 			immersive: { type: Boolean },
 			maxheight: { type: Number },
-			_maxwidth: { type: Number },
-			_left: { type: Number },
+			_styles: { type: Object },
 		};
 	}
 
@@ -92,10 +92,7 @@ export class AttachmentViewEmbed extends BaseMixin(LitElement) {
 	}
 
 	_loaded(e) {
-		this._pendingResolve();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-
+		super._loaded(e);
 		this._setMaxDimensions(e.target);
 	}
 
@@ -103,62 +100,38 @@ export class AttachmentViewEmbed extends BaseMixin(LitElement) {
 		// For a 16:9 aspect ratio, height is 56.25% of width.
 		// We are setting the max-height based on the client height, so we must set the max-width based on the ratio.
 		// If this width is not 100% then we must centre the embedded iframe.
-		const embedContainer = this.shadowRoot.getElementById('embed-container');
 		if (this.maxheight) {
 			const maxWidth = this.maxheight / 0.5625;
-			this._maxwidth = maxWidth;
+			const styles = {
+				maxHeight: `${this.maxheight}px`,
+				maxWidth: `${maxWidth}px`
+			};
+			const embedContainer = this.shadowRoot.getElementById('embed-container');
 			if (embedContainer.clientWidth > maxWidth) {
-				this._left = (embedContainer.clientWidth - maxWidth) / 2;
+				styles.left = `${(embedContainer.clientWidth - maxWidth) / 2}px`;
 			}
+
+			this._styles = styles;
 		}
-	}
-
-	_errored(e) {
-		this._pendingReject();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-		this.dispatchEvent(
-			new CustomEvent('error', {
-				composed: true,
-				bubbles: true,
-				detail: e,
-			}),
-		);
-	}
-
-	firstUpdated() {
-		const pendingPromise = new Promise((resolve, reject) => {
-			this._pendingResolve = resolve;
-			this._pendingReject = reject;
-		});
-
-		const pendingEvent = new CustomEvent('d2l-pending-state', {
-			composed: true,
-			bubbles: true,
-			detail: { promise: pendingPromise },
-		});
-		this.dispatchEvent(pendingEvent);
 	}
 
 	render() {
 		return html`
-			<div id="content">
-				${this.src ? html`
-					<div id="embed-container">
-						<iframe
-							id="embedIframe"
-							src="${this.src}"
-							@load="${this._loaded}"
-							@error="${this._errored}"
-							scrolling="no"
-							frameborder="0"
-							allow="autoplay"
-							allowfullscreen=""
-							style="max-height:${ifDefined(this.maxheight)}px; max-width: ${this._maxwidth}px; left: ${this._left}px"
-						>
-						</iframe>
-					</div>
-				` : html``}
+			<div id="content" >
+				<div id="embed-container">
+					<iframe
+						style="${styleMap(this._styles)}"
+						id="embedIframe"
+						src="${this.src}"
+						@load="${this._loaded}"
+						@error="${this._errored}"
+						scrolling="no"
+						frameborder="0"
+						allow="autoplay"
+						allowfullscreen=""
+					>
+					</iframe>
+				</div>
 				<div id="info">
 					<slot></slot>
 				</div>

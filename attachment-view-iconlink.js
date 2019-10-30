@@ -3,11 +3,11 @@ import '@polymer/iron-icon/iron-icon.js';
 import './icons/cs-30-icons.js';
 import './icons/cs-60-icons.js';
 import { css, html, LitElement } from 'lit-element';
-
 import { BaseMixin } from './base-mixin.js';
+import { PendingMixin } from './pending-mixin.js';
 import { viewStyles } from './attachment-view-styles.js';
 
-export class AttachmentViewIconLink extends BaseMixin(LitElement) {
+export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			icon: { type: String },
@@ -114,27 +114,10 @@ export class AttachmentViewIconLink extends BaseMixin(LitElement) {
 		this.canOpen = true;
 	}
 
-	_loaded() {
-		this._pendingResolve();
-		this._pendingReject = null;
-		this._pendingResolve = null;
-	}
-
 	_errored(e) {
-		if (this._pendingReject) {
-			this._pendingReject();
-			this._pendingReject = null;
-			this._pendingResolve = null;
-		}
 		this._favIconError = true;
 		this.requestUpdate();
-		this.dispatchEvent(
-			new CustomEvent('error', {
-				composed: true,
-				bubbles: true,
-				detail: e,
-			}),
-		);
+		super._errored(e);
 	}
 
 	get _showFavIcon() {
@@ -162,24 +145,15 @@ export class AttachmentViewIconLink extends BaseMixin(LitElement) {
 	}
 
 	firstUpdated(changedProperties) {
-		super.firstUpdated();
 		let pendingPromise;
 		if (changedProperties.has('src')) {
-			pendingPromise = new Promise((resolve, reject) => {
-				this._pendingResolve = resolve;
-				this._pendingReject = reject;
-			});
+			pendingPromise = super._createPendingPromise();
 		} else if (changedProperties.has('icon')) {
 			pendingPromise = Promise.resolve();
 		}
 
 		if (pendingPromise) {
-			const pendingEvent = new CustomEvent('d2l-pending-state', {
-				composed: true,
-				bubbles: true,
-				detail: { promise: pendingPromise },
-			});
-			this.dispatchEvent(pendingEvent);
+			super._dispatchPending(pendingPromise);
 		}
 	}
 
