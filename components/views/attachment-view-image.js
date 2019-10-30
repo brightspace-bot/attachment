@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
+import { BaseMixin } from '../../mixins/base-mixin.js';
 import { bodyStandardStyles } from '@brightspace-ui/core/components/typography/styles.js';
-import { PendingMixin } from './pending-mixin.js';
+import { PendingMixin } from '../../mixins/pending-mixin.js';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { viewStyles } from './attachment-view-styles.js';
 

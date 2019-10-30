@@ -4,8 +4,7 @@ import {
 	withClassPropertiesKnobs,
 	withKnobs,
 } from '@open-wc/demoing-storybook';
-
-import { AttachmentViewIconLink } from '../attachment-view-iconlink.js';
+import { AttachmentViewIconLink } from '../components/views/attachment-view-iconlink.js';
 
 const falseParam = false;
 const favIcon = 'https://www.bbc.co.uk/favicon.ico';

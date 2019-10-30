@@ -1,6 +1,6 @@
 import 'd2l-fetch/d2l-fetch.js';
 import './stub-unfurl-provider.js';
-import '../attachment.js';
+import '../components/attachment.js';
 import { html, storiesOf, withKnobs } from '@open-wc/demoing-storybook';
 import { boolean } from '@storybook/addon-knobs';
 import fetchMock from 'fetch-mock';

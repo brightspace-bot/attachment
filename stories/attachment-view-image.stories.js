@@ -1,6 +1,5 @@
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-
-import { AttachmentViewImage } from '../attachment-view-image.js';
+import { AttachmentViewImage } from '../components/views/attachment-view-image.js';
 
 const src = 'https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/7p/sr/p07psr8q.jpg';
 

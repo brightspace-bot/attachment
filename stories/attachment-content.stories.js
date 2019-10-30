@@ -1,5 +1,5 @@
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-import { Attachment } from '../attachment.js';
+import { Attachment } from '../components/attachment.js';
 import { decorate } from '@storybook/addon-actions';
 
 const dropbox = {

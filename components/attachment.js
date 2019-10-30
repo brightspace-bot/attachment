@@ -3,15 +3,15 @@ import './attachment-embed.js';
 import './attachment-url.js';
 import './attachment-video.js';
 import { css, html, LitElement } from 'lit-element';
-import { defaultLink, normalizeAttachmentUrl, unfurl } from './attachment-utils.js';
+import { defaultLink, normalizeAttachmentUrl, unfurl } from '../helpers/attachment-utils.js';
 import { AttachmentContent } from './attachment-content.js';
 import { AttachmentFile } from './attachment-file.js';
 import { AttachmentImage } from './attachment-image.js';
 import { AttachmentLti } from './attachment-lti.js';
-import { BaseMixin } from './base-mixin.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
 import { classMap } from 'lit-html/directives/class-map.js';
 import { PendingContainerMixin } from 'siren-sdk/src/mixin/pending-container-mixin.js';
-import { RequestProviderMixin } from './request-provider-mixin.js';
+import { RequestProviderMixin } from '../mixins/request-provider-mixin.js';
 
 export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseMixin(LitElement))) {
 	static get properties() {
@@ -288,7 +288,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			${this._hasPendingChildren ? html`
 				<img
-					src="${this.constructor.resolveUrl('icons/link-skeleton.svg')}"
+					src="${this.constructor.resolveUrl('../icons/link-skeleton.svg')}"
 					alt="${this.localize('link_thumbnail')}"
 				/>
 			` : html``}

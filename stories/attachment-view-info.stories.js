@@ -5,7 +5,7 @@ import {
 	withKnobs,
 } from '@open-wc/demoing-storybook';
 
-import { AttachmentViewInfo } from '../attachment-view-info.js';
+import { AttachmentViewInfo } from '../components/views/attachment-view-info.js';
 
 const falseParam = false;
 

@@ -1,7 +1,7 @@
 import './attachment-opener-secure.js';
-import './attachment-view-info.js';
+import './views/attachment-view-info.js';
 import { css, html, LitElement } from 'lit-element';
-import { defaultLink, detectImage, hasExtension } from './attachment-utils.js';
+import { defaultLink, detectImage, hasExtension } from '../helpers/attachment-utils.js';
 
 export class AttachmentFile extends LitElement {
 	static get properties() {

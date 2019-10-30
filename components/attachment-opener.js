@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
 
 export class AttachmentOpener extends BaseMixin(LitElement) {
 	static get properties() {

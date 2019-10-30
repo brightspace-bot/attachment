@@ -1,6 +1,6 @@
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
+import { BaseMixin } from '../../mixins/base-mixin.js';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { viewStyles } from './attachment-view-styles.js';
 

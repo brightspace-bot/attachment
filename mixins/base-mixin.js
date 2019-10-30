@@ -1,4 +1,4 @@
-import { getLocalizeResources } from './localization.js';
+import { getLocalizeResources } from '../helpers/localization.js';
 import { LocalizeMixin } from '@brightspace-ui/core/mixins/localize-mixin.js';
 import { resolveUrl } from '@polymer/polymer/lib/utils/resolve-url.js';
 import { RtlMixin } from '@brightspace-ui/core/mixins/rtl-mixin.js';

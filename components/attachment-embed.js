@@ -1,14 +1,15 @@
 import './attachment-opener.js';
-import './attachment-view-info.js';
+import './views/attachment-view-info.js';
+import './views/attachment-view-embed.js';
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
-import { parseDomainFromUrl } from './attachment-utils.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
 
-export class AttachmentVideo extends BaseMixin(LitElement) {
+export class AttachmentEmbed extends BaseMixin(LitElement) {
 	static get properties() {
 		return {
 			attachment: { type: Object },
 			unfurlResult: { type: Object },
+			immersive: { type: Boolean },
 		};
 	}
 
@@ -20,12 +21,6 @@ export class AttachmentVideo extends BaseMixin(LitElement) {
 		`;
 	}
 
-	get _label() {
-		return this.unfurlResult.providerUrl
-			? this.unfurlResult.providerUrl
-			: parseDomainFromUrl(this.unfurlResult.url);
-	}
-
 	get _name() {
 		return this.attachment.name || this.unfurlResult.title || this.unfurlResult.url;
 	}
@@ -33,23 +28,22 @@ export class AttachmentVideo extends BaseMixin(LitElement) {
 	render() {
 		return html`
 			<d2l-labs-attachment-opener url="${this.unfurlResult.url}">
-				<d2l-labs-attachment-view-video
-					url="${this.unfurlResult.url}"
+				<d2l-labs-attachment-view-embed
 					src="${this.unfurlResult.embedUrl}"
-					thumbnailUrl="${this.unfurlResult.thumbnailUrl}"
+					?immersive="${this.immersive}"
 				>
 					<d2l-labs-attachment-view-info
 						.name="${this._name}"
 						href="${this.unfurlResult.url}"
 						target="_blank"
-						.label="${this._label}"
+						?immersive="${this.immersive}"
 					>
 						<slot name="button" slot="button"></slot>
 					</d2l-labs-attachment-view-info>
-				</d2l-labs-attachment-view-video>
+				</d2l-labs-attachment-view-embed>
 			</d2l-labs-attachment-opener>
 		`;
 	}
 }
 
-window.customElements.define('d2l-labs-attachment-video', AttachmentVideo);
+window.customElements.define('d2l-labs-attachment-embed', AttachmentEmbed);

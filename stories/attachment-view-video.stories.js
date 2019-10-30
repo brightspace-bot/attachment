@@ -1,6 +1,6 @@
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
 
-import { AttachmentViewVideo } from '../attachment-view-video.js';
+import { AttachmentViewVideo } from '../components/views/attachment-view-video.js';
 
 const url = 'https://www.youtube.com/watch?v=pEQjJKFTfHI';
 const embedUrl = 'https://www.youtube.com/embed/pEQjJKFTfHI?feature=oembed';

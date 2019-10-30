@@ -9,20 +9,20 @@
 		<script src="/node_modules/chai/chai.js"></script>
 		<script src="/node_modules/@polymer/test-fixture/test-fixture.js"></script>
 		<script src="/node_modules/wct-mocha/wct-mocha.js"></script>
-		<script type="module" src="../activity-attachment.js"></script>
+		<script type="module" src="../attachment.js"></script>
 	</head>
 	<body>
 
 		<test-fixture id="basic">
 			<template>
-				<d2l-labs-activity-attachment></d2l-labs-activity-attachment>
+				<d2l-labs-attachment></d2l-labs-attachment>
 			</template>
 		</test-fixture>
 
 		<script type="module">
 			import { runAxe } from '@brightspace-ui/core/tools/a11y-test-helper.js';
 
-			describe('d2l-labs-activity-attachment', () => {
+			describe('d2l-labs-attachment', () => {
 				let element;
 
 				beforeEach(async() => {

@@ -1,10 +1,10 @@
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@polymer/iron-icon/iron-icon.js';
-import './icons/cs-30-icons.js';
-import './icons/cs-60-icons.js';
+import '../../icons/cs-30-icons.js';
+import '../../icons/cs-60-icons.js';
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
-import { PendingMixin } from './pending-mixin.js';
+import { BaseMixin } from '../../mixins/base-mixin.js';
+import { PendingMixin } from '../../mixins/pending-mixin.js';
 import { viewStyles } from './attachment-view-styles.js';
 
 export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) {

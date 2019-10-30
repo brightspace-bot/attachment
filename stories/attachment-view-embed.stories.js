@@ -1,6 +1,5 @@
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-
-import { AttachmentViewEmbed } from '../attachment-view-embed.js';
+import { AttachmentViewEmbed } from '../components/views/attachment-view-embed.js';
 
 const embedUrl = 'https://quizlet.com/286716956/match/embed?x=1jj1';
 

@@ -1,5 +1,5 @@
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-import { AttachmentViewDeleted } from '../attachment-view-deleted.js';
+import { AttachmentViewDeleted } from '../components/views/attachment-view-deleted.js';
 import { decorate } from '@storybook/addon-actions';
 
 const pickDetail = decorate([args => args[0].detail]);

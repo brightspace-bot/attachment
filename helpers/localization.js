@@ -12,7 +12,7 @@ export async function getLocalizeResources(langs, baseUrl) {
 	});
 
 	const sergeLangterms = supportedLanguages.map(language => {
-		const url = resolveUrl(`./locales/${language}.json`, baseUrl);
+		const url = resolveUrl(`../locales/${language}.json`, baseUrl);
 		if (cache[url]) {
 			return cache[url];
 		}

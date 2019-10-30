@@ -5,7 +5,7 @@ import {
 	withKnobs
 } from '@open-wc/demoing-storybook';
 
-import { AttachmentViewImageLink } from '../attachment-view-imagelink.js';
+import { AttachmentViewImageLink } from '../components/views/attachment-view-imagelink.js';
 
 const src = 'https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/7p/sr/p07psr8q.jpg';
 

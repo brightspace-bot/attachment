@@ -1,7 +1,7 @@
-import './attachment-view-image.js';
+import './views/attachment-view-image.js';
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
-import { detectImage } from './attachment-utils.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
+import { detectImage } from '../helpers/attachment-utils.js';
 
 export class AttachmentImage extends BaseMixin(LitElement) {
 	static get properties() {

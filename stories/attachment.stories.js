@@ -1,6 +1,6 @@
 import { action, decorate } from '@storybook/addon-actions';
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-import { Attachment } from '../attachment.js';
+import { Attachment } from '../components/attachment.js';
 
 const editableAttachment = {
 	id: '1',

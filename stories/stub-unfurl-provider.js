@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit-element';
 
-import { ProviderMixin } from '../provider-mixin.js';
+import { ProviderMixin } from '../mixins/provider-mixin.js';
 
 export class StubUnfurlProvider extends ProviderMixin(LitElement) {
 	static get properties() {

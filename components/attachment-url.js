@@ -1,9 +1,9 @@
 import './attachment-opener.js';
-import './attachment-view-iconlink.js';
-import './attachment-view-info.js';
+import './views/attachment-view-iconlink.js';
+import './views/attachment-view-info.js';
 import { css, html, LitElement } from 'lit-element';
-import { BaseMixin } from './base-mixin.js';
-import { parseDomainFromUrl } from './attachment-utils.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
+import { parseDomainFromUrl } from '../helpers/attachment-utils.js';
 
 export class AttachmentUrl extends BaseMixin(LitElement) {
 	static get properties() {

@@ -1,6 +1,6 @@
 import 'd2l-fetch/d2l-fetch.js';
 import { html, storiesOf, withClassPropertiesKnobs, withKnobs } from '@open-wc/demoing-storybook';
-import { Attachment } from '../attachment.js';
+import { Attachment } from '../components/attachment.js';
 
 const attachmentWithImage = {
 	id: '1',
