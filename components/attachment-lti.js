@@ -50,7 +50,7 @@ export class AttachmentLti extends AttachmentMixin(BaseMixin(LitElement)) {
 	}
 
 	get _href() {
-		return AttachmentLti.findLink(this.attachment).href;
+		return super.resolveHref(AttachmentLti.findLink(this.attachment).href);
 	}
 
 	get _canOpen() {

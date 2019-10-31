@@ -8,6 +8,7 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 	static get properties() {
 		return {
 			attachment: { type: Object },
+			attachmentId: {type: String }
 		};
 	}
 
@@ -47,7 +48,7 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 		const restoreEvent = new CustomEvent('d2l-attachment-restored', {
 			composed: true,
 			bubbles: true,
-			detail: this.attachment.id,
+			detail: this.attachmentId,
 		});
 		this.dispatchEvent(restoreEvent);
 
@@ -73,7 +74,9 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 	async firstUpdated() {
 		const button = this.shadowRoot.getElementById('button');
 		if (button) {
-			await button.updateComplete;
+			if (button.updateComplete) {
+				await button.updateComplete;
+			}
 			button.focus();
 		}
 	}

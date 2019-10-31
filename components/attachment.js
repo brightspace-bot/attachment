@@ -18,6 +18,8 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	static get properties() {
 		return {
 			attachment: { type: Object },
+			attachmentId: { type: String },
+			baseHref: { type: String },
 			editing: { type: Boolean },
 			immersive: { type: Boolean },
 			permission: { type: Object },
@@ -149,7 +151,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		const removeEvent = new CustomEvent('d2l-attachment-removed', {
 			composed: true,
 			bubbles: true,
-			detail: this.attachment.id,
+			detail: this.attachmentId,
 		});
 		this.dispatchEvent(removeEvent);
 
@@ -177,6 +179,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				.attachment="${this.__attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
+				baseHref="${this.baseHref}"
 			>
 				${this._removeButtonTemplate}
 			</d2l-labs-attachment-file>
@@ -191,6 +194,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				.editing="${this.editing}"
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
+				baseHref="${this.baseHref}"
 			>
 				${this._removeButtonTemplate}
 				${this._immersiveButtonTemplate}
@@ -205,6 +209,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				.attachment="${this.__attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
+				baseHref="${this.baseHref}"
 			>
 				${this._removeButtonTemplate}
 			</d2l-labs-attachment-content>
@@ -294,6 +299,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-view-deleted
 				.attachment="${this.attachment}"
+				attachmentId="${this.attachmentId}"
 			>
 			</d2l-labs-attachment-view-deleted>
 		`;
@@ -331,7 +337,9 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		if (changedProperties.has('deleted') && this.deleted === false) {
 			const attachment = this.shadowRoot.getElementById('attachment');
 			if (attachment && attachment.updateComplete) {
-				await attachment.updateComplete;
+				if (attachment.updateComplete) {
+					await attachment.updateComplete;
+				}
 				attachment.focus();
 			}
 		}

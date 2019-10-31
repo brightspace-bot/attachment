@@ -47,7 +47,7 @@ export class AttachmentContent extends AttachmentMixin(BaseMixin(LitElement)) {
 	}
 
 	get _href() {
-		return AttachmentContent._findLink(this.attachment).href;
+		return super.resolveHref(AttachmentContent._findLink(this.attachment).href);
 	}
 
 	get _label() {

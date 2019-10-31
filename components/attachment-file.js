@@ -77,6 +77,14 @@ export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 		this._target = '_blank';
 	}
 
+	get _src() {
+		return super.resolveHref(this.__src);
+	}
+
+	set _src(value) {
+		this.__src = value;
+	}
+
 	get attachment() {
 		return this._attachment;
 	}
@@ -90,7 +98,7 @@ export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 	}
 
 	get _href() {
-		return AttachmentFile._findLink(this.attachment).href;
+		return super.resolveHref(AttachmentFile._findLink(this.attachment).href);
 	}
 
 	get _label() {
