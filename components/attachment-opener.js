@@ -6,7 +6,7 @@ export class AttachmentOpener extends BaseMixin(LitElement) {
 		return {
 			url: { type: String },
 			target: { type: String },
-			isEditMode: { type: Boolean },
+			editing: { type: Boolean },
 		};
 	}
 
@@ -39,7 +39,7 @@ export class AttachmentOpener extends BaseMixin(LitElement) {
 	}
 
 	_setYPosition(e) {
-		if (!this.isEditMode) {
+		if (!this.editing) {
 			this._currentYPosition = e.clientY;
 		}
 	}
@@ -53,7 +53,7 @@ export class AttachmentOpener extends BaseMixin(LitElement) {
 			return;
 		}
 
-		if (!this.isEditMode && (Math.abs(this._currentYPosition - e.clientY) < 5 || e.keyCode)) {
+		if (!this.editing && (Math.abs(this._currentYPosition - e.clientY) < 5 || e.keyCode)) {
 			window.open(this.url, this.target || '_blank');
 		}
 	}

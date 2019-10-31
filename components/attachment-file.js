@@ -2,8 +2,10 @@ import './attachment-opener-secure.js';
 import './views/attachment-view-info.js';
 import { css, html, LitElement } from 'lit-element';
 import { defaultLink, detectImage, hasExtension } from '../helpers/attachment-utils.js';
+import { AttachmentMixin } from '../mixins/attachment-mixin.js';
+import { BaseMixin } from '../mixins/base-mixin.js';
 
-export class AttachmentFile extends LitElement {
+export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			attachment: { type: Object },

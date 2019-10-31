@@ -3,10 +3,11 @@ import './views/attachment-view-iconlink.js';
 import './views/attachment-view-embed.js';
 import './attachment-opener-secure.js';
 import { css, html, LitElement } from 'lit-element';
+import { AttachmentMixin } from '../mixins/attachment-mixin.js';
 import { BaseMixin } from '../mixins/base-mixin.js';
 import { defaultLink } from '../helpers/attachment-utils.js';
 
-export class AttachmentLti extends BaseMixin(LitElement) {
+export class AttachmentLti extends AttachmentMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			attachment: { type: Object },

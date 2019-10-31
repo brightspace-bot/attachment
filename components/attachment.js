@@ -2,6 +2,7 @@ import '@brightspace-ui/core/components/button/button-icon.js';
 import './attachment-embed.js';
 import './attachment-url.js';
 import './attachment-video.js';
+import './views/attachment-view-deleted.js';
 import { css, html, LitElement } from 'lit-element';
 import { defaultLink, normalizeAttachmentUrl, unfurl } from '../helpers/attachment-utils.js';
 import { AttachmentContent } from './attachment-content.js';
@@ -17,10 +18,10 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	static get properties() {
 		return {
 			attachment: { type: Object },
-			isEditMode: { type: Boolean },
+			editing: { type: Boolean },
 			immersive: { type: Boolean },
 			permission: { type: Object },
-			isDeleted: {type: Boolean }
+			deleted: {type: Boolean }
 		};
 	}
 
@@ -99,6 +100,20 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		}
 	}
 
+	get permission() {
+		return this._permission && this._permission.canAccess ? this._permission : {
+			canAccess: () => true
+		};
+	}
+
+	set permission(value) {
+		const oldValue = this._permission;
+		if (oldValue !== value) {
+			this._permission = value;
+			this.requestUpdate('permission');
+		}
+	}
+
 	async _callUnfurl(attachment) {
 		let unfurlApiEndpoint = this.requestProvider('d2l-provider-unfurl-api-endpoint');
 		if (!unfurlApiEndpoint) {
@@ -160,7 +175,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-file
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.permission="${this.permission}"
 			>
 				${this._removeButtonTemplate}
@@ -173,7 +188,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-lti
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
 			>
@@ -188,7 +203,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-content
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.permission="${this.permission}"
 			>
 				${this._removeButtonTemplate}
@@ -201,7 +216,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-image
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.permission="${this.permission}"
 			>
 				${this._removeButtonTemplate}
@@ -214,7 +229,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-video
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
 			>
@@ -228,7 +243,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-embed
 				id="attachment"
 				.attachment="${this.__attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
@@ -244,7 +259,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			<d2l-labs-attachment-url
 				id="attachment"
 				.attachment="${this.attachment}"
-				.isEditMode="${this.isEditMode}"
+				.editing="${this.editing}"
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
 			>
@@ -254,7 +269,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	get _removeButtonTemplate() {
-		return this.isEditMode ? html`
+		return this.editing ? html`
 				<d2l-button-icon
 					slot="button"
 					icon="tier1:close-small"
@@ -265,7 +280,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	get _immersiveButtonTemplate() {
-		return !this.isEditMode	? html`
+		return !this.editing	? html`
 			<d2l-button-icon
 				slot="button"
 				icon="tier1:fullscreen"
@@ -298,7 +313,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	get _standardTemplate() {
 		return html`
 			${this._skeletonTemplate}
-			<div class="${classMap({ display: !this.isEditMode })}" ?hidden="${this._hasPendingChildren}">
+			<div class="${classMap({ display: !this.editing })}" ?hidden="${this._hasPendingChildren}">
 				${this._attachmentTemplate}
 			</div>
 		`;
@@ -306,14 +321,17 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 
 	render() {
 		return html`
-			${this.isDeleted ? this._deletedTemplate : this._standardTemplate}
+			${this.deleted ? this._deletedTemplate : this._standardTemplate}
 		`;
 	}
 
-	updated(changedProperties) {
-		if (changedProperties.has('isDeleted') && this.isDeleted === false) {
+	async updated(changedProperties) {
+		super.updated(changedProperties);
+
+		if (changedProperties.has('deleted') && this.deleted === false) {
 			const attachment = this.shadowRoot.getElementById('attachment');
-			if (attachment) {
+			if (attachment && attachment.updateComplete) {
+				await attachment.updateComplete;
 				attachment.focus();
 			}
 		}

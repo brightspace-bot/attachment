@@ -70,9 +70,10 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 		`;
 	}
 
-	firstUpdated() {
+	async firstUpdated() {
 		const button = this.shadowRoot.getElementById('button');
 		if (button) {
+			await button.updateComplete;
 			button.focus();
 		}
 	}

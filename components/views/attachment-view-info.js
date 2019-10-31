@@ -101,11 +101,19 @@ export class AttachmentViewInfo extends RtlMixin(LitElement) {
 		this.canOpen = true;
 	}
 
+	focus() {
+		const nameLink = this.shadowRoot.getElementById('name');
+		if (nameLink) {
+			nameLink.focus();
+		}
+	}
+
 	render() {
 		const href = this.canOpen ? this.href : undefined;
 		return html`
 			<div class="info">
 				<a
+					id="name"
 					href="${ifDefined(href)}"
 					target="${this.target}"
 					class="d2l-body-standard attachment-name"

@@ -104,11 +104,11 @@ storiesOf('Attachments|attachment-video', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -195,11 +195,11 @@ storiesOf('Attachments|attachment-video', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${falseProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -222,11 +222,11 @@ storiesOf('Attachments|attachment-video', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}">
-					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -240,10 +240,10 @@ storiesOf('Attachments|attachment-video', module)
 		'No Unfurl Provider',
 		() => {
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 
 			return html`
-				<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?isEditMode="${edit}"></d2l-labs-attachment>
+				<d2l-labs-attachment .attachment=${attachmentWithYoutube} ?editing="${edit}"></d2l-labs-attachment>
 			`;
 		},
 		{

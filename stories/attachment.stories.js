@@ -25,11 +25,11 @@ const hasPermission = {
 const pickDetail = decorate([args => args[0].detail]);
 
 const attachmentRemoved = e => {
-	e.target.isDeleted = true;
+	e.target.deleted = true;
 };
 
 const attachmentRestored = e => {
-	e.target.isDeleted = false;
+	e.target.deleted = false;
 };
 
 const attachmentImmersive = e => {
@@ -46,7 +46,7 @@ storiesOf('Attachments|attachment', module)
 			withClassPropertiesKnobs(Attachment, {
 				template: html`
 					<d2l-labs-attachment
-						?isEditMode="${TRUE}"
+						?editing="${TRUE}"
 						.attachment="${editableAttachment}"
 						.permission="${hasPermission}"
 						@d2l-attachment-removed="${attachmentRemoved}"

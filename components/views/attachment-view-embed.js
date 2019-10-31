@@ -86,6 +86,8 @@ export class AttachmentViewEmbed extends PendingMixin(BaseMixin(LitElement)) {
 	}
 
 	updated(changedProperties) {
+		super.updated(changedProperties);
+
 		if (changedProperties.has('maxheight')) {
 			this._setMaxDimensions();
 		}

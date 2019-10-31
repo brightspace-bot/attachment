@@ -2,9 +2,10 @@ import './attachment-opener.js';
 import './views/attachment-view-info.js';
 import './views/attachment-view-embed.js';
 import { css, html, LitElement } from 'lit-element';
+import { AttachmentMixin } from '../mixins/attachment-mixin.js';
 import { BaseMixin } from '../mixins/base-mixin.js';
 
-export class AttachmentEmbed extends BaseMixin(LitElement) {
+export class AttachmentEmbed extends AttachmentMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
 			attachment: { type: Object },

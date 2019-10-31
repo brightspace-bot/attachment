@@ -74,10 +74,10 @@ storiesOf('Attachments|attachment-url', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachment} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachment} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -98,10 +98,10 @@ storiesOf('Attachments|attachment-url', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachment} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachment} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -122,10 +122,10 @@ storiesOf('Attachments|attachment-url', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachment} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachment} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -148,10 +148,10 @@ storiesOf('Attachments|attachment-url', module)
 				)
 				.catch(unmatchedUrl => browserFetch(unmatchedUrl));
 
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithImageLink} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachmentWithImageLink} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -164,10 +164,10 @@ storiesOf('Attachments|attachment-url', module)
 	.add(
 		'unfurl error',
 		() => {
-			const edit = boolean('isEditMode', false);
+			const edit = boolean('editing', false);
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithImageLink} ?isEditMode="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment .attachment=${attachmentWithImageLink} ?editing="${edit}"></d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
