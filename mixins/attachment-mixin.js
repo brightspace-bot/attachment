@@ -8,9 +8,6 @@ export const AttachmentMixin = superclass => class extends superclass {
 	async focus() {
 		const infoView = this.shadowRoot.querySelector('d2l-labs-attachment-view-info');
 		if (infoView) {
-			if (infoView.updateComplete) {
-				await infoView.updateComplete;
-			}
 			infoView.focus();
 		}
 	}

@@ -4,6 +4,8 @@ import { PendingMixin } from '../../mixins/pending-mixin.js';
 import { styleMap } from 'lit-html/directives/style-map.js';
 import { viewStyles } from './attachment-view-styles.js';
 
+const baseUrl = import.meta.url;
+
 export class AttachmentViewVideo extends PendingMixin(BaseMixin(LitElement)) {
 	static get properties() {
 		return {
@@ -145,7 +147,7 @@ export class AttachmentViewVideo extends PendingMixin(BaseMixin(LitElement)) {
 								aria-label="${this.localize('aria_video_thumbnail')}"
 								alt="${this.localize('video_thumbnail')}">
 							<div>
-								<img class="thumbnail-play" ?hidden="${!this._thumbnailImageLoaded}" src="${this.constructor.resolveUrl('icons/thumbnail-play.svg')}">
+								<img class="thumbnail-play" ?hidden="${!this._thumbnailImageLoaded}" src="${this.resolveUrl('../../icons/thumbnail-play.svg', baseUrl)}">
 							</div>
 						</button>
 					</div>

@@ -102,10 +102,6 @@ export class AttachmentViewInfo extends RtlMixin(LitElement) {
 	}
 
 	focus() {
-		// This doesn't seem to work reliably on some kinds of attachments. e.g. LTI.
-		// I tried various combinations of await this.updateComplete and setTimeout.
-		// It seems like when the LTI iframe loads, it grabs focus which didn't seem
-		// to happen in the old Polymer implementation.
 		const nameLink = this.shadowRoot.getElementById('name');
 		if (nameLink) {
 			nameLink.focus();

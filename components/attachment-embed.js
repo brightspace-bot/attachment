@@ -11,6 +11,7 @@ export class AttachmentEmbed extends AttachmentMixin(BaseMixin(LitElement)) {
 			attachment: { type: Object },
 			unfurlResult: { type: Object },
 			immersive: { type: Boolean },
+			maxheight: { type: Number },
 		};
 	}
 
@@ -32,6 +33,7 @@ export class AttachmentEmbed extends AttachmentMixin(BaseMixin(LitElement)) {
 				<d2l-labs-attachment-view-embed
 					src="${this.unfurlResult.embedUrl}"
 					?immersive="${this.immersive}"
+					maxheight="${this.maxheight}"
 				>
 					<d2l-labs-attachment-view-info
 						.name="${this._name}"

@@ -13,6 +13,7 @@ export class AttachmentLti extends AttachmentMixin(BaseMixin(LitElement)) {
 			attachment: { type: Object },
 			permission: { type: Object },
 			immersive: { type: Boolean },
+			maxheight: { type: Number },
 		};
 	}
 
@@ -83,7 +84,7 @@ export class AttachmentLti extends AttachmentMixin(BaseMixin(LitElement)) {
 
 	get _embedTemplate() {
 		return html`
-			<d2l-labs-attachment-view-embed src="${this._href}" ?immersive="${this.immersive}">
+			<d2l-labs-attachment-view-embed src="${this._href}" ?immersive="${this.immersive}" maxheight="${this.maxheight}">
 				${this._infoTemplate}
 			</d2l-labs-attachment-view-embed>
 		`;

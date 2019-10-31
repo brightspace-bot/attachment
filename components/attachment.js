@@ -14,6 +14,8 @@ import { classMap } from 'lit-html/directives/class-map.js';
 import { PendingContainerMixin } from 'siren-sdk/src/mixin/pending-container-mixin.js';
 import { RequestProviderMixin } from '../mixins/request-provider-mixin.js';
 
+const baseUrl = import.meta.url;
+
 export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseMixin(LitElement))) {
 	static get properties() {
 		return {
@@ -23,7 +25,8 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			editing: { type: Boolean },
 			immersive: { type: Boolean },
 			permission: { type: Object },
-			deleted: {type: Boolean }
+			deleted: {type: Boolean },
+			maxheight: { type: Number },
 		};
 	}
 
@@ -63,9 +66,9 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 
 	static _getUnfurledTemplate(type) {
 		switch (type) {
-			case 'Video':
+			case 'video':
 				return 'video';
-			case 'Embed':
+			case 'embed':
 				return 'embed';
 			default:
 				return 'url';
@@ -94,12 +97,13 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		// which is incorrect
 		this.__attachment = { ...value, url: normalizeAttachmentUrl(value) };
 
-		this._template = Attachment._getSimpleTemplate(this.__attachment);
-		if (this._template === null) {
-			this._unfurl(this.__attachment);
-		} else {
-			this.requestUpdate();
-		}
+		// this._template = Attachment._getSimpleTemplate(this.__attachment);
+		// if (this._template === null) {
+		// 	this._unfurl(this.__attachment);
+		// } else {
+		// 	this.requestUpdate();
+		// }
+		this.requestUpdate('attachment');
 	}
 
 	get permission() {
@@ -195,6 +199,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
 				baseHref="${this.baseHref}"
+				maxheight="${this.maxheight}"
 			>
 				${this._removeButtonTemplate}
 				${this._immersiveButtonTemplate}
@@ -252,6 +257,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
+				maxheight="${this.maxheight}"
 			>
 				${this._removeButtonTemplate}
 				${this._immersiveButtonTemplate}
@@ -296,20 +302,23 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	get _deletedTemplate() {
-		return html`
-			<d2l-labs-attachment-view-deleted
-				.attachment="${this.attachment}"
-				attachmentId="${this.attachmentId}"
-			>
-			</d2l-labs-attachment-view-deleted>
-		`;
+		if (this.deleted) {
+			return html`
+				<d2l-labs-attachment-view-deleted
+					.attachment="${this.attachment}"
+					attachmentId="${this.attachmentId}"
+				>
+				</d2l-labs-attachment-view-deleted>
+			`;
+		}
+		return html``;
 	}
 
 	get _skeletonTemplate() {
 		return html`
 			${this._hasPendingChildren ? html`
 				<img
-					src="${this.constructor.resolveUrl('../icons/link-skeleton.svg')}"
+					src="${this.resolveUrl('../icons/link-skeleton.svg', baseUrl)}"
 					alt="${this.localize('link_thumbnail')}"
 				/>
 			` : html``}
@@ -319,27 +328,35 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	get _standardTemplate() {
 		return html`
 			${this._skeletonTemplate}
-			<div class="${classMap({ display: !this.editing })}" ?hidden="${this._hasPendingChildren}">
+			<div class="${classMap({ display: !this.editing })}" ?hidden="${this._hasPendingChildren || this.deleted}">
 				${this._attachmentTemplate}
 			</div>
 		`;
 	}
 
 	render() {
+		// ${ this.deleted ? this._deletedTemplate : this._standardTemplate }
 		return html`
-			${this.deleted ? this._deletedTemplate : this._standardTemplate}
+			${this._deletedTemplate}
+			${this._standardTemplate}
 		`;
 	}
 
 	async updated(changedProperties) {
 		super.updated(changedProperties);
 
+		if (changedProperties.has('attachment') && this.attachment) {
+			this._template = Attachment._getSimpleTemplate(this.__attachment);
+			if (this._template === null) {
+				this._unfurl(this.__attachment);
+			} else {
+				this.requestUpdate();
+			}
+		}
+
 		if (changedProperties.has('deleted') && this.deleted === false) {
 			const attachment = this.shadowRoot.getElementById('attachment');
-			if (attachment && attachment.updateComplete) {
-				if (attachment.updateComplete) {
-					await attachment.updateComplete;
-				}
+			if (attachment) {
 				attachment.focus();
 			}
 		}
