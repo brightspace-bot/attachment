@@ -108,9 +108,10 @@ export class AttachmentViewEmbed extends PendingMixin(BaseMixin(LitElement)) {
 				maxHeight: `${this.maxheight}px`,
 				maxWidth: `${maxWidth}px`
 			};
-			const embedContainer = this.shadowRoot.getElementById('embed-container');
-			if (embedContainer.clientWidth > maxWidth) {
-				styles.left = `${(embedContainer.clientWidth - maxWidth) / 2}px`;
+			// const embedContainer = this.shadowRoot.getElementById('embed-container');
+			const container = this.ownerDocument.documentElement;
+			if (container.clientWidth > maxWidth) {
+				styles.left = `${(container.clientWidth - maxWidth) / 2}px`;
 			}
 
 			this._styles = styles;

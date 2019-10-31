@@ -1,5 +1,6 @@
 import './attachment-opener.js';
 import './views/attachment-view-iconlink.js';
+import './views/attachment-view-imagelink.js';
 import './views/attachment-view-info.js';
 import { css, html, LitElement } from 'lit-element';
 import { AttachmentMixin } from '../mixins/attachment-mixin.js';

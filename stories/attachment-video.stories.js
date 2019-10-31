@@ -20,7 +20,7 @@ const unfurlYoutube = {
 	class: [],
 	properties: {
 		url: 'https://www.youtube.com/watch?v=pEQjJKFTfHI',
-		type: 'Video',
+		type: 'video',
 		embedUrl: 'https://www.youtube.com/embed/pEQjJKFTfHI?feature=oembed',
 		thumbnailUrl: 'https://i.ytimg.com/vi/pEQjJKFTfHI/hqdefault.jpg',
 		title: 'GCNs Classic Rides | Vancouver - British Columbia: Canadas Cycling Hotbed',

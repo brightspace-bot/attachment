@@ -134,7 +134,7 @@ export function detectImage(attachment) {
 	);
 	if (imageLink) {
 		return {
-			type: 'Image',
+			type: 'image',
 			url: imageLink.href,
 		};
 	}
@@ -142,7 +142,7 @@ export function detectImage(attachment) {
 	imageLink = defaultLink(attachment.url);
 	if (imageLink && hasExtension(parseUri(imageLink.href).file, imageExtensions)) {
 		return {
-			type: 'Image',
+			type: 'image',
 			url: imageLink.href,
 		};
 	}
@@ -163,7 +163,7 @@ function detectVideo(attachment) {
 		return null;
 	}
 	return {
-		type: 'Video',
+		type: 'video',
 		embedUrl: embedLink.href,
 		thumbnailUrl: thumbnailLink.href,
 		url: defaultLink(attachment.url).href,
@@ -176,7 +176,7 @@ function detectEmbed(attachment) {
 	}
 
 	return {
-		type: 'Embed',
+		type: 'embed',
 		embedUrl: defaultLink(attachment.url).href,
 		url: defaultLink(attachment.url).href,
 	};
@@ -231,17 +231,17 @@ export async function unfurl(endpoint, checkTrustedFn, attachment) {
 		};
 	}
 
-	if (result.type === 'Video' && (!result.embedUrl || !result.thumbnailUrl)) {
-		result.type = 'Link';
+	if (result.type === 'video' && (!result.embedUrl || !result.thumbnailUrl)) {
+		result.type = 'website';
 	}
 
-	if (result.type === 'Video' || result.type === 'Embed') {
+	if (result.type === 'video' || result.type === 'embed') {
 		const trusted = await checkTrustedFn(result.url);
 		if (!trusted) {
 			if (!unfurled) {
 				result = await callUnfurl(endpoint, defaultLink(attachment.url).href);
 			}
-			result.type = 'Link';
+			result.type = 'website';
 		}
 	}
 

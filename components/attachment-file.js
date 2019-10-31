@@ -129,7 +129,7 @@ export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 
 	get _imageTemplate() {
 		return html`
-			<d2l-labs-attachment-view-image src="${this._src}" name="${this._name}">
+			<d2l-labs-attachment-view-image src="${this._src}" .name="${this._name}">
 				<slot name="button" slot="button"></slot>
 			</d2l-labs-attachment-view-image>
 		`;
