@@ -242,6 +242,7 @@ export async function unfurl(endpoint, checkTrustedFn, attachment) {
 				result = await callUnfurl(endpoint, defaultLink(attachment.url).href);
 			}
 			result.type = 'website';
+			result.untrusted = true;
 		}
 	}
 

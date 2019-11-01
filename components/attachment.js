@@ -22,6 +22,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			attachment: { type: Object },
 			attachmentId: { type: String },
 			baseHref: { type: String },
+			creating: { type: Boolean },
 			editing: { type: Boolean },
 			immersive: { type: Boolean },
 			permission: { type: Object },
@@ -143,12 +144,28 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 					url: defaultLink(attachment.url).href,
 				};
 			}
+
+			this._handleUntrusted(this._unfurlResult):
+
 			this._template = Attachment._getUnfurledTemplate(this._unfurlResult.type);
 			// TODO - notify name updated
 			// this._name = attachment.name || unfurled.title || unfurled.url;
 		} finally {
 			this.requestUpdate();
 		}
+	}
+
+	_handledUntrusted(unfurlResult) {
+		if (!unfurlResult.untrusted) {
+			return;
+		}
+
+		const untrustedEvent = new CustomEvent('d2l-attachment-untrusted', {
+			composed: true,
+			bubbles: true,
+			detail: this.attachmentId,
+		});
+		this.dispatchEvent(untrustedEvent);
 	}
 
 	_removeAttachment() {
