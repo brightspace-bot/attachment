@@ -145,7 +145,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 				};
 			}
 
-			this._handleUntrusted(this._unfurlResult):
+			this._handleUntrusted(this._unfurlResult);
 
 			this._template = Attachment._getUnfurledTemplate(this._unfurlResult.type);
 			// TODO - notify name updated
@@ -155,7 +155,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		}
 	}
 
-	_handledUntrusted(unfurlResult) {
+	_handleUntrusted(unfurlResult) {
 		if (!unfurlResult.untrusted) {
 			return;
 		}

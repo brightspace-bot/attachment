@@ -54,8 +54,8 @@ export class AttachmentList extends BaseMixin(LitElement) {
 		return this.editing && this._hasAttachments;
 	}
 
-	_onUntrustedAttachment() {
-		this._hasUntrustedAttachment = true;
+	_untrustedAttachment(e) {
+		this._hasUntrustedAttachment = e.target.creating;
 	}
 
 	_dismissUntrusted() {
@@ -83,7 +83,7 @@ export class AttachmentList extends BaseMixin(LitElement) {
 	firstUpdated(changedProperties) {
 		super.firstUpdated(changedProperties);
 
-		this.addEventListener('d2l-attachment-untrusted', this._onUntrustedAttached);
+		this.addEventListener('d2l-attachment-untrusted', this._untrustedAttachment);
 		this.addEventListener('d2l-alert-closed', this._dismissUntrusted);
 
 		const slot = this.shadowRoot.getElementById('attachments');
