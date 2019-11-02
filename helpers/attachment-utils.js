@@ -114,6 +114,32 @@ export function normalizeAttachmentUrl(obj) {
 	return _url;
 }
 
+export function normalizeUrl(url) {
+	if (!url) {
+		return [
+			{
+				href: '',
+			},
+		];
+	}
+
+	let _url = Array.isArray(obj.urls) ? obj.urls : null;
+	if (!_url) {
+		_url = Array.isArray(obj.url) ? obj.url : [obj.url];
+	}
+
+	// Convert strings to Links
+	_url = _url.map(link => {
+		if (typeof link === 'string') {
+			return {
+				href: link,
+			};
+		}
+		return link;
+	});
+	return _url;
+}
+
 export function parseDomainFromUrl(url) {
 	if (!url) {
 		return '';

@@ -122,6 +122,10 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	async _callUnfurl(attachment) {
+		if (attachment.unfurlResult) {
+			return attachment.unfurlResult;
+		}
+
 		let unfurlApiEndpoint = this.requestProvider('d2l-provider-unfurl-api-endpoint');
 		if (!unfurlApiEndpoint) {
 			unfurlApiEndpoint = () => '';
@@ -144,8 +148,10 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 					url: defaultLink(attachment.url).href,
 				};
 			}
-
+			this._handleUnfurled(this._unfurlResult);
 			this._handleUntrusted(this._unfurlResult);
+
+			attachment.unfurlResult = this._unfurlResult;
 
 			this._template = Attachment._getUnfurledTemplate(this._unfurlResult.type);
 			// TODO - notify name updated
@@ -164,6 +170,15 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			composed: true,
 			bubbles: true,
 			detail: this.attachmentId,
+		});
+		this.dispatchEvent(untrustedEvent);
+	}
+
+	_handleUnfurled(unfurlResult) {
+		const untrustedEvent = new CustomEvent('d2l-attachment-unfurled', {
+			composed: true,
+			bubbles: true,
+			detail: unfurlResult,
 		});
 		this.dispatchEvent(untrustedEvent);
 	}

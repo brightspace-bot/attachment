@@ -69,9 +69,18 @@ export class AttachmentList extends BaseMixin(LitElement) {
 	render() {
 		return html`
 			<div class="d2l-typography attachment-list-wrapper">
-				${this._showTitle ? html`<div id="attachment-list-title" class="d2l-label-text">${this.localize('attachments')}</div>` : html``}
+				${this._showTitle ? html`
+					<div id="attachment-list-title" class="d2l-label-text">${this.localize('attachments')}
+					</div>
+				` : html``}
 
-				${this._showUntrusted ? html`<d2l-alert id="untrusted-website-warning" type="warning" subtext="${this.localize('unstrusted_website_subtext')}" has-close-button>${this.localize('unstrusted_website')}</d2l-alert>` : html``}
+				${this._showUntrusted ? html`
+					<d2l-alert id="untrusted-website-warning"
+						type="warning"
+						subtext="${this.localize('unstrusted_website_subtext')}"
+						has-close-button>${this.localize('unstrusted_website')}
+					</d2l-alert>
+				` : html``}
 
 				<ul role="contentinfo" aria-label="${this.localize('attachments')}">
 					<slot id="attachments" name="attachment"></slot>

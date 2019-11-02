@@ -1,5 +1,5 @@
 {
-  "name": "@brightspace/attachment",
+  "name": "@d2l/d2l-attachment",
   "description": "Activity attachments",
   "repository": "https://github.com/Brightspace/attachment.git",
   "private": true,
