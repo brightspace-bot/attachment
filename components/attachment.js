@@ -4,7 +4,7 @@ import './attachment-url.js';
 import './attachment-video.js';
 import './views/attachment-view-deleted.js';
 import { css, html, LitElement } from 'lit-element';
-import { defaultLink, normalizeAttachmentUrl, unfurl } from '../helpers/attachment-utils.js';
+import { defaultLink, unfurl } from '../helpers/attachment-utils.js';
 import { AttachmentContent } from './attachment-content.js';
 import { AttachmentFile } from './attachment-file.js';
 import { AttachmentImage } from './attachment-image.js';
@@ -81,32 +81,6 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		this._hasPendingChildren = true;
 	}
 
-	get attachment() {
-		return this._attachment;
-	}
-
-	set attachment(value) {
-		if (value === this._attachment) {
-			return;
-		}
-
-		this._attachment = value;
-
-		// This copy is required because we have still not standardized how
-		// we are passing in the url property which should be an array of urls.
-		// In some cases we are still passing the array in the urls property
-		// which is incorrect
-		this.__attachment = { ...value, url: normalizeAttachmentUrl(value) };
-
-		// this._template = Attachment._getSimpleTemplate(this.__attachment);
-		// if (this._template === null) {
-		// 	this._unfurl(this.__attachment);
-		// } else {
-		// 	this.requestUpdate();
-		// }
-		this.requestUpdate('attachment');
-	}
-
 	get permission() {
 		return this._permission && this._permission.canAccess ? this._permission : {
 			canAccess: () => true
@@ -122,8 +96,14 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	async _callUnfurl(attachment) {
-		if (attachment.unfurlResult) {
-			return attachment.unfurlResult;
+		let result;
+		const unfurlCache = this.requestProvider('d2l-provider-unfurl-cache');
+		const url = defaultLink(attachment.url).href;
+		if (unfurlCache) {
+			result = unfurlCache().get(url);
+			if (result) {
+				return result;
+			}
 		}
 
 		let unfurlApiEndpoint = this.requestProvider('d2l-provider-unfurl-api-endpoint');
@@ -136,7 +116,11 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			checkTrustedSiteFn = () => () => false;
 		}
 
-		const result = await unfurl(unfurlApiEndpoint(), checkTrustedSiteFn(), attachment);
+		result = await unfurl(unfurlApiEndpoint(), checkTrustedSiteFn(), attachment);
+
+		if (result && unfurlCache) {
+			unfurlCache().set(url, result);
+		}
 		return result;
 	}
 
@@ -150,8 +134,6 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			}
 			this._handleUnfurled(this._unfurlResult);
 			this._handleUntrusted(this._unfurlResult);
-
-			attachment.unfurlResult = this._unfurlResult;
 
 			this._template = Attachment._getUnfurledTemplate(this._unfurlResult.type);
 			// TODO - notify name updated
@@ -212,7 +194,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-file
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
 				baseHref="${this.baseHref}"
@@ -226,7 +208,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-lti
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
 				?immersive="${this.immersive}"
@@ -243,7 +225,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-content
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
 				baseHref="${this.baseHref}"
@@ -257,7 +239,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-image
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.permission="${this.permission}"
 			>
@@ -270,7 +252,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-video
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
@@ -284,7 +266,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		return html`
 			<d2l-labs-attachment-embed
 				id="attachment"
-				.attachment="${this.__attachment}"
+				.attachment="${this.attachment}"
 				.editing="${this.editing}"
 				.unfurlResult="${this._unfurlResult}"
 				.permission="${this.permission}"
@@ -378,9 +360,9 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		super.updated(changedProperties);
 
 		if (changedProperties.has('attachment') && this.attachment) {
-			this._template = Attachment._getSimpleTemplate(this.__attachment);
+			this._template = Attachment._getSimpleTemplate(this.attachment);
 			if (this._template === null) {
-				this._unfurl(this.__attachment);
+				this._unfurl(this.attachment);
 			} else {
 				this.requestUpdate();
 			}
