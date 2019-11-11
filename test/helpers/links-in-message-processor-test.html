@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+		<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+		<script src="/node_modules/mocha/mocha.js"></script>
+		<script src="/node_modules/chai/chai.js"></script>
+		<script src="/node_modules/@polymer/test-fixture/test-fixture.js"></script>
+		<script src="/node_modules/wct-mocha/wct-mocha.js"></script>
+	 </head>
+  <body>
+    <script type="module">
+		import { LinksInMessageProcessor } from '../../helpers/links-in-message-processor.js';
+
+		describe('LinksInMessageProcessor', () => {
+			it('Process Text Embed', async() => {
+				const processor = new LinksInMessageProcessor();
+				const msg = `checkout: <iframe src="https://quizlet.com/240278214/match/embed?x=1jj1" height="500" width="100%" style="border:0"></iframe>`;
+				let attachments = [];
+
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(1);
+				expect(attachments[0].embed).to.exist;
+				expect(attachments[0].url).to.equal(`https://quizlet.com/240278214/match/embed?x=1jj1`);
+			});
+
+			it('Process Text NO Embed', async() => {
+				const processor = new LinksInMessageProcessor();
+				const msg = `Hello Students!`;
+				let attachments = [];
+
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(0);
+			});
+
+			it('Process HTML Embed', async() => {
+				const msg = `<p>&lt;iframe src="https://quizlet.com/240278214/match/embed?x=1jj1" height="500" width="100%" style="border:0"&gt;&lt;/iframe&gt;</p>`;
+
+				let attachments = [];
+				const processor = new LinksInMessageProcessor();
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(1);
+				expect(attachments[0].embed).to.exist;
+				expect(attachments[0].url).to.equal(`https://quizlet.com/240278214/match/embed?x=1jj1`);
+			});
+
+			it('Process HTML NO Embed', async() => {
+				const msg = `<img src="https://s.brightspace.com/lib/emoticons/1.0.0/celebrate.svg" alt="celebrate" data-d2l-emoji="celebrate">`;
+
+				let attachments = [];
+				const processor = new LinksInMessageProcessor();
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(0);
+			});
+
+			it('Process HTML With URL', async() => {
+				const msg = `<p>http://d2l.com</p>`;
+
+				let attachments = [];
+				const processor = new LinksInMessageProcessor();
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(1);
+				expect(attachments[0].embed).to.be.undefined;
+				expect(attachments[0].url).to.equal(`http://d2l.com`);
+			});
+
+			it('Process HTML Combined', async() => {
+				const msg = `<img src="https://s.brightspace.com/lib/emoticons/1.0.0/celebrate.svg" alt="celebrate" data-d2l-emoji="celebrate">
+				<p>http://d2l.com</p>
+				<p>&lt;iframe src="https://quizlet.com/240278214/match/embed?x=1jj1" height="500" width="100%" style="border:0"&gt;&lt;/iframe&gt;</p>
+				<img src="https://s.brightspace.com/lib/emoticons/1.0.0/celebrate.svg" alt="celebrate" data-d2l-emoji="celebrate">`;
+
+				let attachments = [];
+				const processor = new LinksInMessageProcessor();
+				const result = processor.process(msg, items => {
+					attachments = items;
+				});
+
+				expect(attachments.length).to.equal(2);
+				expect(attachments[0].embed).to.be.undefined;
+				expect(attachments[0].url).to.equal(`http://d2l.com`);
+				expect(attachments[1].embed).to.equal(`<iframe src="https://quizlet.com/240278214/match/embed?x=1jj1" height="500" width="100%" style="border:0"></iframe>`);
+				expect(attachments[1].url).to.equal(`https://quizlet.com/240278214/match/embed?x=1jj1`);
+			});
+		});
+    </script>
+  </body>
+</html>
