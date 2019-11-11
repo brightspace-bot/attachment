@@ -70,8 +70,8 @@ To lint AND run local unit tests:
 npm test
 ```
 
-[ci-url]: https://travis-ci.org/Brightspace/attachment
-[ci-image]: https://travis-ci.org/Brightspace/attachment.svg?branch=master
+[ci-url]: https://travis-ci.com/Brightspace/attachment
+[ci-image]: https://travis-ci.com/Brightspace/attachment.svg?branch=master
 
 ## Versioning, Releasing & Deploying
 
