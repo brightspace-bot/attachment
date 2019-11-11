@@ -1,7 +1,6 @@
 # d2l-labs-attachment
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Brightspace/attachment.svg)](https://greenkeeper.io/)
-[![Build status](https://travis-ci.com/@brightspace/attachment.svg?branch=master)](https://travis-ci.com/@brightspace/attachment)
+[![Build status](https://travis-ci.com/@brightspace/attachment.svg?branch=master)](https://travis-ci.com/brightspace/attachment)
 
 > Note: this is a ["labs" component](https://github.com/BrightspaceUI/guide/wiki/Component-Tiers). While functional, these tasks are prerequisites to promotion to BrightspaceUI "official" status:
 >
