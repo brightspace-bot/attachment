@@ -1,5 +1,6 @@
 import { isHttpUrl, LinksRegExpString } from './links-parse';
 
+// eslint-disable-next-line max-len
 // https://alex7kom.github.io/nano-nanoid-cc/?alphabet=bjectSymhasOwnProp-0123456789ABCDEFGHIJKLMNQRTUVWXYZ_dfgiklquvxz%0A&size=6&speed=100&speedUnit=second
 function nanoid(size = 21) {
 	const url = 'bjectSymhasOwnProp-0123456789ABCDEFGHIJKLMNQRTUVWXYZ_dfgiklquvxz';
@@ -24,9 +25,10 @@ function escapeHtml(string) {
 		'\'': '&#x27;',
 		'/': '&#x2F;'
 	};
-	const htmlEscaper = /[&<>"'\/]/g;
+	const htmlEscaper = /[&<>"'/]/g;
 
-	return ('' + string).replace(htmlEscaper, function (match) {
+	// eslint-disable-next-line prefer-template
+	return ('' + string).replace(htmlEscaper, (match) => {
 		return htmlEscapes[match];
 	});
 }
@@ -58,7 +60,7 @@ export class LinkRenderer {
 		if (isHtml) {
 			content = escapeHtml(content); // html escape the non-url content
 		}
-		markers.forEach(({placeholder, replacement})=> {
+		markers.forEach(({placeholder, replacement}) => {
 			content = content.replace(placeholder, replacement); // now fill in the hyperlink anchor tags
 		});
 		return content;

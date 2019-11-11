@@ -25,7 +25,7 @@ const unfurlYoutube = {
 		thumbnailUrl: 'https://i.ytimg.com/vi/pEQjJKFTfHI/hqdefault.jpg',
 		title: 'GCNs Classic Rides | Vancouver - British Columbia: Canadas Cycling Hotbed',
 		description:
-			'Jeremy toured the sights and sounds of Vancouver by bike, to discover the best roads and cycling culture that British Columbia has to offer.',
+			'Jeremy toured the sights and sounds of Vancouver by bike, to discover the best roads and cycling culture that British Columbia has to offer.', // eslint-disable-line max-len
 	},
 };
 

@@ -147,7 +147,9 @@ export class AttachmentViewVideo extends PendingMixin(BaseMixin(LitElement)) {
 								aria-label="${this.localize('aria_video_thumbnail')}"
 								alt="${this.localize('video_thumbnail')}">
 							<div>
-								<img class="thumbnail-play" ?hidden="${!this._thumbnailImageLoaded}" src="${this.resolveUrl('../../icons/thumbnail-play.svg', baseUrl)}">
+								<img class="thumbnail-play"
+									?hidden="${!this._thumbnailImageLoaded}"
+									src="${this.resolveUrl('../../icons/thumbnail-play.svg', baseUrl)}">
 							</div>
 						</button>
 					</div>

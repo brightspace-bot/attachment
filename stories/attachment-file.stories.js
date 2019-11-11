@@ -19,14 +19,14 @@ export const courseFile = {
 	id: '1',
 	name: 'WhistlerGranFondo2018-FinisherCert.pdf',
 	url:
-		'http://hostname/d2l/common/dialogs/quickLink/quickLink.d2l?ou=123065&type=coursefile&fileId=WhistlerGranFondo2018-FinisherCert.pdf',
+		'http://hostname/d2l/common/dialogs/quickLink/quickLink.d2l?ou=123065&type=coursefile&fileId=WhistlerGranFondo2018-FinisherCert.pdf', // eslint-disable-line max-len
 };
 
 export const courseFileImage = {
 	id: '1',
 	name: 'Talking to our Children',
 	url:
-		'https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/7p/sr/p07psr8q.jpg?quickLink.d2l&ou=123065&type=coursefile&fileId=p07psr8q.jpg',
+		'https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/7p/sr/p07psr8q.jpg?quickLink.d2l&ou=123065&type=coursefile&fileId=p07psr8q.jpg', // eslint-disable-line max-len
 };
 
 const hasPermission = {

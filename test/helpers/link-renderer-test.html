@@ -1,29 +1,29 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
 		<script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 		<script src="/node_modules/mocha/mocha.js"></script>
 		<script src="/node_modules/chai/chai.js"></script>
 		<script src="/node_modules/@polymer/test-fixture/test-fixture.js"></script>
 		<script src="/node_modules/wct-mocha/wct-mocha.js"></script>
-  </head>
-  <body>
-    <script type="module">
+	</head>
+	<body>
+		<script type="module">
 		import { LinkRenderer } from '../../helpers/link-renderer.js';
 
 		describe('LinkRenderer', () => {
 			it('RenderText', async() => {
 				const renderer = new LinkRenderer('d2l.com');
-				const result = renderer.renderText(`&lt;script&gt;alert('http://google.com')&lt;/script&gt; http://d2l.com http://www.d2l.com`);
-				expect(result).to.be.equal(`&lt;script&gt;alert('<a href="http://google.com" target="_blank">http://google.com</a>')&lt;/script&gt; <a href="http://d2l.com" target="_parent">http://d2l.com</a> <a href="http://www.d2l.com" target="_blank">http://www.d2l.com</a>`);
+				const result = renderer.renderText(`&lt;script&gt;alert('http://google.com')&lt;/script&gt; http://d2l.com http://www.d2l.com`); // eslint-disable-line quotes, max-len
+				expect(result).to.be.equal(`&lt;script&gt;alert('<a href="http://google.com" target="_blank">http://google.com</a>')&lt;/script&gt; <a href="http://d2l.com" target="_parent">http://d2l.com</a> <a href="http://www.d2l.com" target="_blank">http://www.d2l.com</a>`); // eslint-disable-line quotes, max-len
 			});
 			it('RenderHTML', async() => {
 				const renderer = new LinkRenderer('d2l.com');
-				const result = renderer.renderHTML(`&lt;script&gt;alert('http://google.com')&lt;/script&gt; <img src="http://nowhere.com/1.gif" /> http://d2l.com http://www.d2l.com/d?a=1&b=2`);
-				expect(result).to.be.equal(`&lt;script&gt;alert('<a href="http://google.com" target="_blank">http://google.com</a>')&lt;/script&gt; <img src="http://nowhere.com/1.gif"> <a href="http://d2l.com" target="_parent">http://d2l.com</a> <a href="http://www.d2l.com/d?a=1&amp;b=2" target="_blank">http://www.d2l.com/d?a=1&amp;b=2</a>`);
+				const result = renderer.renderHTML(`&lt;script&gt;alert('http://google.com')&lt;/script&gt; <img src="http://nowhere.com/1.gif" /> http://d2l.com http://www.d2l.com/d?a=1&b=2`); // eslint-disable-line quotes, max-len
+				expect(result).to.be.equal(`&lt;script&gt;alert('<a href="http://google.com" target="_blank">http://google.com</a>')&lt;/script&gt; <img src="http://nowhere.com/1.gif"> <a href="http://d2l.com" target="_parent">http://d2l.com</a> <a href="http://www.d2l.com/d?a=1&amp;b=2" target="_blank">http://www.d2l.com/d?a=1&amp;b=2</a>`); // eslint-disable-line quotes, max-len
 			});
 		});
-    </script>
-  </body>
+		</script>
+	</body>
 </html>

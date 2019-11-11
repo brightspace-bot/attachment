@@ -1,4 +1,4 @@
-import {LinksRegExpString, isHttpUrl} from './links-parse';
+import { isHttpUrl, LinksRegExpString } from './links-parse';
 
 export class LinksInMessageProcessor {
 	constructor() {

@@ -3,6 +3,9 @@ import { AttachmentViewImage } from '../components/views/attachment-view-image.j
 
 const src = 'https://ichef.bbci.co.uk/wwfeatures/live/624_351/images/live/p0/7p/sr/p07psr8q.jpg';
 
+// eslint-disable-next-line max-len
+const longName = 'Conversation runs out quickly when talking to a newborn. They don’t say anything back. They won’t groan when you tell them it’s going to rain, or smile when you tell a joke.';
+
 storiesOf('Views|attachment-view-image', module)
 	.addDecorator(withKnobs)
 	.add('default', () =>
@@ -10,7 +13,7 @@ storiesOf('Views|attachment-view-image', module)
 			template: html`
 				<d2l-labs-attachment-view-image
 					src="${src}"
-					name="Conversation runs out quickly when talking to a newborn. They don’t say anything back. They won’t groan when you tell them it’s going to rain, or smile when you tell a joke."
+					name="${longName}"
 				></d2l-labs-attachment-view-image>
 			`,
 		}),

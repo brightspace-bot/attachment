@@ -50,7 +50,11 @@ storiesOf('Attachments|attachment-embed', module)
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${trueProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithQuizletEmbed} ?immersive="${immersive}" ?editing="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment
+						.attachment=${attachmentWithQuizletEmbed}
+						?immersive="${immersive}"
+						?editing="${edit}">
+					</d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -78,7 +82,11 @@ storiesOf('Attachments|attachment-embed', module)
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}" ?trusted="${falseProp}">
-					<d2l-labs-attachment .attachment=${attachmentWithQuizletEmbed} ?immersive="${immersive}" ?editing="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment
+						.attachment=${attachmentWithQuizletEmbed}
+						?immersive="${immersive}"
+						?editing="${edit}">
+					</d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 			`;
 		},
@@ -106,7 +114,11 @@ storiesOf('Attachments|attachment-embed', module)
 
 			return html`
 				<d2l-stub-unfurl-provider endpoint="${endpoint}">
-					<d2l-labs-attachment .attachment=${attachmentWithQuizletEmbed} ?immersive="${immersive}" ?editing="${edit}"></d2l-labs-attachment>
+					<d2l-labs-attachment
+						.attachment=${attachmentWithQuizletEmbed}
+						?immersive="${immersive}"
+						?editing="${edit}">
+					</d2l-labs-attachment>
 				</d2l-stub-unfurl-provider>
 				`;
 		},
@@ -123,7 +135,11 @@ storiesOf('Attachments|attachment-embed', module)
 			const edit = boolean('editing', false);
 
 			return html`
-				<d2l-labs-attachment .attachment=${attachmentWithQuizletEmbed} ?immersive="${immersive}" ?editing="${edit}"></d2l-labs-attachment>
+				<d2l-labs-attachment
+					.attachment=${attachmentWithQuizletEmbed}
+					?immersive="${immersive}"
+					?editing="${edit}">
+				</d2l-labs-attachment>
 			`;
 		},
 		{
