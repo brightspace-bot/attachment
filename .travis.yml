@@ -13,7 +13,7 @@ script:
     npm run test:travis || travis_terminate 1;
   fi
 after_success:
-- frauci-update-version -d=skip && export TRAVIS_TAG=$(frauci-get-version)
+- frauci-update-version && export TRAVIS_TAG=$(frauci-get-version)
 deploy:
   provider: releases
   api_key: "$GITHUB_RELEASE_TOKEN"

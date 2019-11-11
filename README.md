@@ -71,7 +71,7 @@ npm test
 ```
 
 [ci-url]: https://travis-ci.com/Brightspace/attachment
-[ci-image]: https://travis-ci.com/Brightspace/attachment.svg?branch=master
+[ci-image]: https://travis-ci.com/Brightspace/attachment.svg?token=z1N1ibLo45u7EF4sGt3Y&branch=master
 
 ## Versioning, Releasing & Deploying
 
