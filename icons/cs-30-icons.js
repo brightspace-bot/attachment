@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import '@polymer/polymer/polymer-legacy.js';
 import '@polymer/iron-iconset-svg/iron-iconset-svg.js';
 

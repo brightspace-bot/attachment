@@ -46,13 +46,15 @@ parseUri.options = {
 		parser: /(?:^|&)([^&=]*)=?([^&]*)/g,
 	},
 	parser: {
+		// eslint-disable-next-line max-len
 		strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+		// eslint-disable-next-line max-len
 		loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/,
 	},
 };
 
-const imageMediaTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'];
-const imageExtensions = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
+export const imageMediaTypes = ['image/jpeg', 'image/png', 'image/bmp', 'image/gif'];
+export const imageExtensions = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
 
 export function hasExtension(path, extensions) {
 	if (!path) {
@@ -65,6 +67,7 @@ export function hasExtension(path, extensions) {
 }
 
 export function defaultLink(url, rels = ['self', 'alternate']) {
+	const _url = normalizeUrl(url);
 	function hasRel(rel) {
 		return function hasRelInner(urlToCheck) {
 			return urlToCheck.rel && urlToCheck.rel.some(r => r === rel);
@@ -73,45 +76,19 @@ export function defaultLink(url, rels = ['self', 'alternate']) {
 
 	let link;
 	for (let i = 0; i < rels.length && !link; i += 1) {
-		link = url.find(hasRel(rels[i]));
+		link = _url.find(hasRel(rels[i]));
 	}
 
 	if (!link) {
-		link = url.find(x => !x.rel || x.rel.length === 0);
+		link = _url.find(x => !x.rel || x.rel.length === 0);
 	}
 	if (!link) {
 		link =
-			url.length > 0
-				? url[0]
+			_url.length > 0
+				? _url[0]
 				: { href: '' };
 	}
 	return link;
-}
-
-export function normalizeAttachmentUrl(obj) {
-	if (!obj || !obj.url) {
-		return [
-			{
-				href: '',
-			},
-		];
-	}
-
-	let _url = Array.isArray(obj.urls) ? obj.urls : null;
-	if (!_url) {
-		_url = Array.isArray(obj.url) ? obj.url : [obj.url];
-	}
-
-	// Convert strings to Links
-	_url = _url.map(link => {
-		if (typeof link === 'string') {
-			return {
-				href: link,
-			};
-		}
-		return link;
-	});
-	return _url;
 }
 
 export function normalizeUrl(url) {
@@ -123,10 +100,7 @@ export function normalizeUrl(url) {
 		];
 	}
 
-	let _url = Array.isArray(obj.urls) ? obj.urls : null;
-	if (!_url) {
-		_url = Array.isArray(obj.url) ? obj.url : [obj.url];
-	}
+	let _url = Array.isArray(url) ? url : [url];
 
 	// Convert strings to Links
 	_url = _url.map(link => {
@@ -155,7 +129,7 @@ export function parseDomainFromUrl(url) {
 }
 
 export function detectImage(attachment) {
-	let imageLink = attachment.url.find(link =>
+	let imageLink = normalizeUrl(attachment.url).find(link =>
 		imageMediaTypes.some(mimeType => mimeType === link.mediaType),
 	);
 	if (imageLink) {
@@ -179,15 +153,19 @@ function detectVideo(attachment) {
 	if (attachment.type !== 'Video') {
 		return null;
 	}
-	const embedLink = (attachment.url || []).filter(
+	const url = normalizeUrl(attachment.url);
+	const embedLink = (url || []).filter(
 		x => x.rel && x.rel.some(r => r === 'alternate'),
 	)[0];
-	const thumbnailLink = (attachment.url || []).filter(
+
+	const thumbnailLink = (url || []).filter(
 		x => x.rel && x.rel.some(r => r === 'icon'),
 	)[0];
+
 	if (!embedLink || !thumbnailLink) {
 		return null;
 	}
+
 	return {
 		type: 'video',
 		embedUrl: embedLink.href,

@@ -19,7 +19,7 @@ const noFavIcon = {
 	properties: {
 		providerUrl: 'The-Beeb',
 		description:
-			'The best of the BBC, with the latest news and sport headlines, weather, TV and radio highlights and much more from across the whole of BBC Online',
+			'The best of the BBC, with the latest news and sport headlines, weather, TV and radio highlights and much more from across the whole of BBC Online', // eslint-disable-line max-len
 	},
 };
 
@@ -27,7 +27,7 @@ const unfurlFavIcon = {
 	properties: {
 		providerUrl: 'The-Beeb',
 		description:
-			'The best of the BBC, with the latest news and sport headlines, weather, TV and radio highlights and much more from across the whole of BBC Online',
+			'The best of the BBC, with the latest news and sport headlines, weather, TV and radio highlights and much more from across the whole of BBC Online', // eslint-disable-line max-len
 		favicon: 'https://www.bbc.co.uk/favicon.ico',
 	},
 };

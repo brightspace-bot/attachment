@@ -13,7 +13,7 @@ export const immersiveAttachment = {
 	id: '1',
 	name: 'Saltire LTI Tool',
 	url:
-		'https://lti.tools/saltire/tp/quickLink/quickLink.d2l?ou=123065&type=lti&rcode=AEAD0C19-C6E9-4E27-993D-CE2FABBDBA9C-61&srcou=123065',
+		'https://lti.tools/saltire/tp/quickLink/quickLink.d2l?ou=123065&type=lti&rcode=AEAD0C19-C6E9-4E27-993D-CE2FABBDBA9C-61&srcou=123065', // eslint-disable-line max-len
 };
 
 const TRUE = true;

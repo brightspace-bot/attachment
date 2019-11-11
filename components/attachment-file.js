@@ -1,7 +1,7 @@
 import './attachment-opener-secure.js';
 import './views/attachment-view-info.js';
 import { css, html, LitElement } from 'lit-element';
-import { defaultLink, detectImage, hasExtension } from '../helpers/attachment-utils.js';
+import { defaultLink, detectImage, hasExtension, imageExtensions } from '../helpers/attachment-utils.js';
 import { AttachmentMixin } from '../mixins/attachment-mixin.js';
 import { BaseMixin } from '../mixins/base-mixin.js';
 
@@ -91,9 +91,14 @@ export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 
 	set attachment(value) {
 		this._attachment = value;
-		const image = detectImage(this._attachment);
+		let image = detectImage(this._attachment);
 		if (image) {
 			this._src = image.url;
+			return;
+		}
+		image = AttachmentFile._findLink(this._attachment, imageExtensions);
+		if (image) {
+			this._src = image.href;
 		}
 	}
 
