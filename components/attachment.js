@@ -5,6 +5,7 @@ import './attachment-video.js';
 import './views/attachment-view-deleted.js';
 import { css, html, LitElement } from 'lit-element';
 import { defaultLink, unfurl } from '../helpers/attachment-utils.js';
+import { announce } from '@brightspace-ui/core/helpers/announce.js';
 import { AttachmentContent } from './attachment-content.js';
 import { AttachmentFile } from './attachment-file.js';
 import { AttachmentImage } from './attachment-image.js';
@@ -173,8 +174,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 		});
 		this.dispatchEvent(removeEvent);
 
-		// TODO - add back announce
-		// this._announce('aria_removed_attachment', 'attachment_name', this.attachment.name);
+		announce(this.localize('aria_removed_attachment', 'attachment_name', this.attachment.name));
 	}
 
 	_immersiveAttachment() {
@@ -349,7 +349,6 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	}
 
 	render() {
-		// ${ this.deleted ? this._deletedTemplate : this._standardTemplate }
 		return html`
 			${this._deletedTemplate}
 			${this._standardTemplate}

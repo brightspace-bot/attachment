@@ -1,5 +1,6 @@
 import '@brightspace-ui/core/components/button/button-subtle.js';
 import { css, html, LitElement } from 'lit-element';
+import { announce } from '@brightspace-ui/core/helpers/announce.js';
 import { BaseMixin } from '../../mixins/base-mixin.js';
 import { bodySmallStyles } from '@brightspace-ui/core/components/typography/styles.js';
 import { viewStyles } from './attachment-view-styles.js';
@@ -43,8 +44,6 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 	}
 
 	_undo() {
-		// TODO - Do we really need this?
-		// e.preventDefault(); // Prevents triggering of underlying embedded video buttons
 		const restoreEvent = new CustomEvent('d2l-attachment-restored', {
 			composed: true,
 			bubbles: true,
@@ -52,8 +51,7 @@ export class AttachmentViewDeleted extends BaseMixin(LitElement) {
 		});
 		this.dispatchEvent(restoreEvent);
 
-		// TODO Fix announce
-		// this._announce('aria_restored_attachment', 'attachment_name', this.attachment.name);
+		announce(this.localize('aria_restored_attachment', 'attachment_name', this.attachment.name));
 	}
 
 	render() {

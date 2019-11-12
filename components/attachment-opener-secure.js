@@ -1,5 +1,6 @@
 import 'd2l-tooltip/d2l-tooltip.js';
 import { css, html } from 'lit-element';
+import { announce } from '@brightspace-ui/core/helpers/announce.js';
 import { AttachmentOpener } from './attachment-opener.js';
 
 export class AttachmentOpenerSecure extends AttachmentOpener {
@@ -7,7 +8,6 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 		return {
 			canOpen: { type: Boolean },
 			componentType: { type: String },
-			name: { type: String },
 			_showTooltip: { type: String },
 		};
 	}
@@ -108,8 +108,7 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 			tooltip.hide();
 		}
 		this.requestUpdate();
-		// TODO - Add aria announcement
-		// this._announce(this._getCannotOpenTerm(this._handler), 'attachment_name', this.attachment.name);
+		announce(this.localize(`attachment_cannot_open_${this.componentType}`));
 	}
 
 	connectedCallback() {
@@ -124,7 +123,7 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 	render() {
 		return html`
 			<d2l-tooltip id="tooltip" custom-target="" position="top"
-				>${this.localize(`attachment_cannot_open_${this.componentType}`, this.name)}</d2l-tooltip
+				>${this.localize(`attachment_cannot_open_${this.componentType}`)}</d2l-tooltip
 			>
 			<slot></slot>
 		`;
