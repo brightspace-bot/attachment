@@ -240,9 +240,9 @@ export async function unfurl(endpoint, checkTrustedFn, attachment) {
 	}
 
 	if (result.type === 'video' || result.type === 'embed') {
-		const trusted = false;
+		let trusted = false;
 		try {
-			await checkTrustedFn(result.url);
+			trusted = await checkTrustedFn(result.url);
 		} catch {}
 
 		if (!trusted) {
