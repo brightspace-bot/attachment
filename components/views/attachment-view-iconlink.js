@@ -31,7 +31,7 @@ export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) 
 				#content {
 					display: flex;
 					flex-direction: row;
-					align-items: center;
+					align-items: stretch;
 					width: 100%;
 					box-sizing: border-box;
 					padding: 14px 5px 14px 10px;
@@ -50,11 +50,17 @@ export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) 
 					display: none;
 				}
 
-				#content > iron-icon {
+				#icons {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+				}
+
+				#icons > iron-icon {
 					padding-right: 10px;
 				}
 
-				:host([dir='rtl']) #content > iron-icon {
+				:host([dir='rtl']) #icons > iron-icon {
 					padding-right: 0px;
 					padding-left: 10px;
 				}
@@ -160,7 +166,9 @@ export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) 
 	render() {
 		return html`
 			<div id="content">
-				${this._showFavIcon ? this._favIconTemplate : this._iconTemplate}
+				<div id="icons">
+					${this._showFavIcon ? this._favIconTemplate : this._iconTemplate}
+				</div>
 				<slot></slot>
 			</div>
 		`;
