@@ -243,7 +243,9 @@ export async function unfurl(endpoint, checkTrustedFn, attachment) {
 		let trusted = false;
 		try {
 			trusted = await checkTrustedFn(result.url);
-		} catch {}
+		} catch {
+			// ignore
+		}
 
 		if (!trusted) {
 			if (!unfurled) {
