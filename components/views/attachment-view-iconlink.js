@@ -39,7 +39,7 @@ export class AttachmentViewIconLink extends PendingMixin(BaseMixin(LitElement)) 
 				}
 
 				:host([dir='rtl']) #content {
-					padding: 14px 10px 14px0 0xauto;
+					padding: 14px 10px 14px	5px;
 				}
 
 				.big-screen {
