@@ -209,7 +209,7 @@ async function callUnfurl(endpoint, url) {
 				url,
 			};
 		}
-	} catch {
+	} catch (e) {
 		return {
 			url,
 		};
@@ -243,7 +243,7 @@ export async function unfurl(endpoint, checkTrustedFn, attachment) {
 		let trusted = false;
 		try {
 			trusted = await checkTrustedFn(result.url);
-		} catch {
+		} catch (e) {
 			// ignore
 		}
 
