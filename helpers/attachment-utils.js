@@ -187,7 +187,7 @@ function detectEmbed(attachment) {
 }
 
 async function callUnfurl(endpoint, url) {
-	if (!endpoint) {
+	if (!endpoint || !url) {
 		return {
 			url
 		};
