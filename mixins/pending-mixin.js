@@ -1,3 +1,5 @@
+import { AsyncStateEvent } from '@brightspace-ui/core/helpers/asyncStateEvent.js';
+
 export const PendingMixin = superclass => class extends superclass {
 	_loaded() {
 		if (this._pendingResolve) {
@@ -35,11 +37,7 @@ export const PendingMixin = superclass => class extends superclass {
 	}
 
 	_dispatchPending(promise) {
-		const pendingEvent = new CustomEvent('pending-state', {
-			composed: true,
-			bubbles: true,
-			detail: { promise },
-		});
+		const pendingEvent = new AsyncStateEvent(promise);
 		this.dispatchEvent(pendingEvent);
 	}
 };
