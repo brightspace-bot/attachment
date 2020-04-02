@@ -3,6 +3,7 @@ import './attachment-embed.js';
 import './attachment-url.js';
 import './attachment-video.js';
 import './views/attachment-view-deleted.js';
+import { AsyncContainerMixin, asyncStates } from '@brightspace-ui/core/mixins/async-container/async-container-mixin.js';
 import { css, html, LitElement } from 'lit-element';
 import { defaultLink, unfurl } from '../helpers/attachment-utils.js';
 import { announce } from '@brightspace-ui/core/helpers/announce.js';
@@ -12,12 +13,11 @@ import { AttachmentImage } from './attachment-image.js';
 import { AttachmentLti } from './attachment-lti.js';
 import { BaseMixin } from '../mixins/base-mixin.js';
 import { classMap } from 'lit-html/directives/class-map.js';
-import { PendingContainerMixin } from 'siren-sdk/src/mixin/pending-container-mixin.js';
 import { RequestProviderMixin } from '../mixins/request-provider-mixin.js';
 
 const baseUrl = import.meta.url;
 
-export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseMixin(LitElement))) {
+export class Attachment extends RequestProviderMixin(AsyncContainerMixin(BaseMixin(LitElement))) {
 	static get properties() {
 		return {
 			attachment: { type: Object },
@@ -75,11 +75,6 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 			default:
 				return 'url';
 		}
-	}
-
-	constructor() {
-		super();
-		this._hasPendingChildren = true;
 	}
 
 	get permission() {
@@ -330,7 +325,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 
 	get _skeletonTemplate() {
 		return html`
-			${this._hasPendingChildren ? html`
+			${this.asyncState !== asyncStates.complete ? html`
 				<img
 					src="${this.resolveUrl('../icons/link-skeleton.svg', baseUrl)}"
 					alt="${this.localize('link_thumbnail')}"
@@ -342,7 +337,7 @@ export class Attachment extends RequestProviderMixin(PendingContainerMixin(BaseM
 	get _standardTemplate() {
 		return html`
 			${this._skeletonTemplate}
-			<div class="${classMap({ display: !this.editing })}" ?hidden="${this._hasPendingChildren || this.deleted}">
+			<div class="${classMap({ display: !this.editing })}" ?hidden="${this.asyncState !== asyncStates.complete || this.deleted}">
 				${this._attachmentTemplate}
 			</div>
 		`;
