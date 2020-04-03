@@ -20,9 +20,17 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 		`;
 	}
 
-	constructor() {
-		super();
-		this.setAttribute('tabindex', '-1');
+	updated(changedProperties) {
+		super.updated(changedProperties);
+		changedProperties.forEach((_, prop) => {
+			if (prop === 'canOpen') {
+				if (this.canOpen) {
+					this.removeAttribute('tabindex');
+				} else {
+					this.setAttribute('tabindex', '0');
+				}
+			}
+		});
 	}
 
 	_viewAttachment(e) {
@@ -34,7 +42,6 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 			super._viewAttachment(e);
 			return;
 		}
-		this.focus();
 		announce(this.localize(`attachment_cannot_open_${this.componentType}`));
 	}
 
