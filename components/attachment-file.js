@@ -146,7 +146,7 @@ export class AttachmentFile extends AttachmentMixin(BaseMixin(LitElement)) {
 				url="${this._href}"
 				target="${this._target}"
 				.canOpen="${this._canOpen}"
-				componentType="${this._componentType}"
+				.componentType="${this._componentType}"
 				name="${this._name}"
 			>
 				<d2l-labs-attachment-view-iconlink icon="${this._componentType}" .canOpen="${this._canOpen}">
