@@ -77,6 +77,11 @@ export class Attachment extends RequestProviderMixin(AsyncContainerMixin(BaseMix
 		}
 	}
 
+	constructor() {
+		super();
+		this.baseHref = '';
+	}
+
 	get permission() {
 		return this._permission && this._permission.canAccess ? this._permission : {
 			canAccess: () => true
