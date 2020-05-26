@@ -73,8 +73,3 @@ npm test
 [ci-url]: https://travis-ci.com/Brightspace/attachment
 [ci-image]: https://travis-ci.com/Brightspace/attachment.svg?token=z1N1ibLo45u7EF4sGt3Y&branch=master
 
-## Versioning, Releasing & Deploying
-
-All version changes should obey [semantic versioning](https://semver.org/) rules.
-
-Include either `[increment major]`, `[increment minor]` or `[increment patch]` in your merge commit message to automatically increment the `package.json` version and create a tag.
