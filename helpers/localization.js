@@ -1,6 +1,5 @@
-import { resolveUrl } from '@polymer/polymer/lib/utils/resolve-url.js';
 import { getLocalizeOverrideResources } from '@brightspace-ui/core/helpers/getLocalizeResources.js';
-
+import { resolveUrl } from '@polymer/polymer/lib/utils/resolve-url.js';
 
 const SUPPORTED_LANGUAGES = ['ar-sa', 'ar', 'da-dk', 'da', 'de-de', 'de', 'en-ca', 'en-gb', 'en-us', 'en',
 	'es-mx', 'es', 'fi-fl', 'fi', 'fr-ca', 'fr-fr', 'fr', 'ja-jp', 'ja', 'ko-kr', 'ko', 'nb-no', 'nb',
@@ -42,7 +41,7 @@ export async function getLocalizeResources(langs, baseUrl) {
 	responses.forEach(language => {
 		Object.assign(langterms, language);
 	});
-	
+
 	return await getLocalizeOverrideResources(
 		supportedLanguages[supportedLanguages.length - 1],
 		langterms,
