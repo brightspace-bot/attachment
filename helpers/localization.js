@@ -13,8 +13,8 @@ export async function getLocalizeResources(langs, baseUrl) {
 	});
 
 	function resolveOverridesFunc() {
-		//package+component
-		return '@d2l\\d2l-attachment\\attachment';
+		//{packageName}+{sergeComponentName}
+		return '@d2l\\d2l-attachment\\d2l-attachment';
 	}
 
 	const sergeLangterms = supportedLanguages.map(language => {
