@@ -1,3 +1,4 @@
+import { getLocalizeOverrideResources } from '@brightspace-ui/core/helpers/getLocalizeResources.js';
 import { resolveUrl } from '@polymer/polymer/lib/utils/resolve-url.js';
 
 const SUPPORTED_LANGUAGES = ['ar-sa', 'ar', 'da-dk', 'da', 'de-de', 'de', 'en-ca', 'en-gb', 'en-us', 'en',
@@ -10,6 +11,11 @@ export async function getLocalizeResources(langs, baseUrl) {
 	const supportedLanguages = langs.reverse().filter(language => {
 		return SUPPORTED_LANGUAGES.indexOf(language) > -1;
 	});
+
+	function resolveOverridesFunc() {
+		//{packageName}+{sergeComponentName}
+		return '@d2l\\d2l-attachment\\d2l-attachment';
+	}
 
 	const sergeLangterms = supportedLanguages.map(language => {
 		const url = resolveUrl(`../locales/${language}.json`, baseUrl);
@@ -36,8 +42,9 @@ export async function getLocalizeResources(langs, baseUrl) {
 		Object.assign(langterms, language);
 	});
 
-	return {
-		language: supportedLanguages[supportedLanguages.length - 1],
-		resources: langterms
-	};
+	return await getLocalizeOverrideResources(
+		supportedLanguages[supportedLanguages.length - 1],
+		langterms,
+		resolveOverridesFunc
+	);
 }
