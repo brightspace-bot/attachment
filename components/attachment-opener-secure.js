@@ -45,7 +45,7 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 
 	render() {
 		return html`
-			${!this.canOpen ? html`<d2l-tooltip announced id="tooltip">${this.localize(`attachment_cannot_open_${this.componentType}`)}</d2l-tooltip>` : null}
+			${!this.canOpen ? html`<d2l-tooltip announced id="tooltip" position="top">${this.localize(`attachment_cannot_open_${this.componentType}`)}</d2l-tooltip>` : null}
 			<slot></slot>
 		`;
 	}
