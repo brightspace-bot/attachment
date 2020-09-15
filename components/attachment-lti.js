@@ -96,7 +96,7 @@ export class AttachmentLti extends AttachmentMixin(BaseMixin(LitElement)) {
 				url="${this._href}"
 				target="${this._target}"
 				.canOpen="${this._canOpen}"
-				.componentType="content"
+				componentType="content"
 				name="${this.attachment.name}"
 			>
 				${this._canOpen ? this._embedTemplate : this._iconLinkTemplate}
