@@ -6,7 +6,7 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 	static get properties() {
 		return {
 			canOpen: { type: Boolean },
-			componentType: { type: String }
+			componentType: { type: String, attribute: 'component-type' }
 		};
 	}
 
