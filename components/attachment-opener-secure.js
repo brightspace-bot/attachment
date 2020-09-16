@@ -1,13 +1,12 @@
-import 'd2l-tooltip/d2l-tooltip.js';
+import '@brightspace-ui/core/components/tooltip/tooltip.js';
 import { css, html } from 'lit-element';
-import { announce } from '@brightspace-ui/core/helpers/announce.js';
 import { AttachmentOpener } from './attachment-opener.js';
 
 export class AttachmentOpenerSecure extends AttachmentOpener {
 	static get properties() {
 		return {
 			canOpen: { type: Boolean },
-			componentType: { type: String }
+			componentType: { type: String, attribute: 'component-type' }
 		};
 	}
 
@@ -42,12 +41,11 @@ export class AttachmentOpenerSecure extends AttachmentOpener {
 			super._viewAttachment(e);
 			return;
 		}
-		announce(this.localize(`attachment_cannot_open_${this.componentType}`));
 	}
 
 	render() {
 		return html`
-			${!this.canOpen ? html`<d2l-tooltip id="tooltip" position="top">${this.localize(`attachment_cannot_open_${this.componentType}`)}</d2l-tooltip>` : null}
+			${!this.canOpen ? html`<d2l-tooltip announced id="tooltip" position="top">${this.localize(`attachment_cannot_open_${this.componentType}`)}</d2l-tooltip>` : null}
 			<slot></slot>
 		`;
 	}
