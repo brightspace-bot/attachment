@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "Gömülü ek yer tutucusu",
    "aria_remove_attachment" : "Şu Eki Kaldır: {attachment_name}",
    "aria_removed_attachment" : "Kaldırılan Ek: {attachment_name}",
    "aria_restored_attachment" : "Geri Yüklenen Ek: {attachment_name}",
@@ -19,8 +20,8 @@
    "dropbox" : "Ödev",
    "epobject" : "ePortfolio",
    "form" : "Form Şablonu",
-   "link_thumbnail" : "Link thumbnail",
-   "lti" : "Dış Öğrenim Aracı",
+   "link_thumbnail" : "Bağlantı küçük resmi",
+   "lti" : "Harici Öğrenim Aracı",
    "news" : "Duyuru",
    "open_in_fullscreen" : "Tam ekran modunda aç",
    "quiz" : "Sınav",
@@ -28,6 +29,8 @@
    "selfassess" : "Öz Değerlendirme",
    "survey" : "Anket",
    "undo" : "Geri Al",
+   "unstrusted_website" : "Bu medya, güvenilmeyen bir web sitesinden geliyor.",
+   "unstrusted_website_subtext" : "Öğrenciler yine de yeni bir sekme açarak bu medyaya erişebilir. Bu kaynağı güvenilir web sitelerinize eklemek için yöneticinizle iletişim kurun.",
    "url" : "Url",
    "video_thumbnail" : "Video küçük resmi"
 }

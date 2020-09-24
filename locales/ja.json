@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "埋め込み添付ファイルのプレースホルダ",
    "aria_remove_attachment" : "添付ファイルの削除: {attachment_name}",
    "aria_removed_attachment" : "削除された添付ファイル: {attachment_name}",
    "aria_restored_attachment" : "復元された添付ファイル: {attachment_name}",
@@ -19,7 +20,7 @@
    "dropbox" : "課題",
    "epobject" : "ePortfolio",
    "form" : "フォームテンプレート",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "サムネイルのリンク",
    "lti" : "外部学習ツール",
    "news" : "お知らせ",
    "open_in_fullscreen" : "全画面モードで表示",
@@ -28,6 +29,8 @@
    "selfassess" : "自己評価",
    "survey" : "調査",
    "undo" : "元に戻す",
+   "unstrusted_website" : "このメディアは信頼されていない Web サイトからのものです。",
+   "unstrusted_website_subtext" : "受講者は、新しいタブで引き続きアクセスできます。このソースを信頼されている Web サイトに追加するには、管理者に問い合わせてください。",
    "url" : "URL",
    "video_thumbnail" : "ビデオサムネイル"
 }
