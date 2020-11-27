@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "內嵌附件預留位置",
    "aria_remove_attachment" : "移除附件：{attachment_name}",
    "aria_removed_attachment" : "已移除附件：{attachment_name}",
    "aria_restored_attachment" : "已還原附件：{attachment_name}",
@@ -19,7 +20,7 @@
    "dropbox" : "作業",
    "epobject" : "ePortfolio",
    "form" : "表單範本",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "連結縮圖",
    "lti" : "外部學習工具",
    "news" : "宣告",
    "open_in_fullscreen" : "在全螢幕模式中開啟",
@@ -28,6 +29,8 @@
    "selfassess" : "自我評量",
    "survey" : "問卷調查",
    "undo" : "復原",
+   "unstrusted_website" : "此媒體來自未受信任的網站。",
+   "unstrusted_website_subtext" : "學習者依然可以在新頁籤中存取它。請聯絡您的管理員，以將此來源新增至您的受信任網站。",
    "url" : "URL",
    "video_thumbnail" : "視訊縮圖"
 }

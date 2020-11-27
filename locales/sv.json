@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "Platshållare för inbäddad bilaga",
    "aria_remove_attachment" : "Ta bort bilaga: {attachment_name}",
    "aria_removed_attachment" : "Tog bort bilaga: {attachment_name}",
    "aria_restored_attachment" : "Återställde bilaga: {attachment_name}",
@@ -19,7 +20,7 @@
    "dropbox" : "Uppgift",
    "epobject" : "ePortfolio",
    "form" : "Formulärmall",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "Länkminiatyr",
    "lti" : "Externa inlärningsverktyg",
    "news" : "Meddelande",
    "open_in_fullscreen" : "Öppna i helskärmsläge",
@@ -28,6 +29,8 @@
    "selfassess" : "Självbedömning",
    "survey" : "Enkät",
    "undo" : "Ångra",
+   "unstrusted_website" : "Filen kommer från en otillförlitlig webbplats.",
+   "unstrusted_website_subtext" : "Eleverna kan få åtkomst till den på en ny flik. Kontakta administratören om du vill lägga till den här källan i dina betrodda webbplatser.",
    "url" : "Url",
    "video_thumbnail" : "Videominiatyr"
 }

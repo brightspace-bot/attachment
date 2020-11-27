@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "Platzhalter für eingebettete Anhänge",
    "aria_remove_attachment" : "Anhang entfernen: {attachment_name}",
    "aria_removed_attachment" : "Anhang entfernt: {attachment_name}",
    "aria_restored_attachment" : "Anhang wiederhergestellt: {attachment_name}",
@@ -19,7 +20,7 @@
    "dropbox" : "Übung",
    "epobject" : "ePortfolio",
    "form" : "Formularvorlage",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "Link-Vorschaubild",
    "lti" : "Externes Lern-Tool",
    "news" : "Ankündigung",
    "open_in_fullscreen" : "Im Vollbildmodus öffnen",
@@ -28,6 +29,8 @@
    "selfassess" : "Selbsteinschätzung",
    "survey" : "Umfrage",
    "undo" : "Rückgängig",
+   "unstrusted_website" : "Dieses Medium stammt von einer nicht vertrauenswürdigen Website.",
+   "unstrusted_website_subtext" : "Lerner können trotzdem über eine neue Registerkarte darauf zugreifen. Wenden Sie sich an Ihren Administrator, um diese Quelle zu den Websites hinzuzufügen, denen Sie vertrauen.",
    "url" : "URL",
    "video_thumbnail" : "Video-Vorschaubild"
 }
