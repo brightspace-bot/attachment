@@ -1,10 +1,11 @@
 {
+   "aria_embed_placeholder" : "Tijdelijke aanduiding voor bijgevoegde bijlage",
    "aria_remove_attachment" : "Bijlage {attachment_name} verwijderen",
    "aria_removed_attachment" : "Bijlage {attachment_name} verwijderd",
    "aria_restored_attachment" : "Bijlage {attachment_name} hersteld",
    "aria_undo_attachment" : "Bijlage {attachment_name} ongedaan maken",
    "aria_video_placeholder" : "Tijdelijke aanduiding voor video",
-   "aria_video_thumbnail" : "Videominiatuur. Klik om af te spelen.",
+   "aria_video_thumbnail" : "Videominiatuur. Klikken om af te spelen.",
    "attachment_cannot_open_content" : "U hebt geen toegang tot deze inhoud",
    "attachment_cannot_open_file" : "U hebt geen toegang tot dit bestand",
    "attachment_cannot_open_google_doc" : "U hebt geen toegang tot deze koppeling naar Google Doc",
@@ -19,7 +20,7 @@
    "dropbox" : "Opdracht",
    "epobject" : "ePortfolio",
    "form" : "Formuliersjabloon",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "Miniatuur van koppeling",
    "lti" : "Externe cursustool",
    "news" : "Aankondiging",
    "open_in_fullscreen" : "Openen op volledig scherm",
@@ -28,6 +29,8 @@
    "selfassess" : "Zelfevaluatie",
    "survey" : "Enquête",
    "undo" : "Ongedaan maken",
+   "unstrusted_website" : "Deze media komt van een niet-vertrouwde website.",
+   "unstrusted_website_subtext" : "Cursisten kunnen er nog steeds bij via een nieuw tabblad. Neem contact op met uw beheerder om deze bron toe te voegen aan uw vertrouwde websites.",
    "url" : "URL",
    "video_thumbnail" : "Videominiatuur"
 }

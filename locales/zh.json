@@ -1,4 +1,5 @@
 {
+   "aria_embed_placeholder" : "嵌入式附件占位符",
    "aria_remove_attachment" : "删除附件：{attachment_name}",
    "aria_removed_attachment" : "已删除附件：{attachment_name}",
    "aria_restored_attachment" : "已还原附件：{attachment_name}",
@@ -13,13 +14,13 @@
    "attachments" : "附件",
    "chat" : "聊天",
    "checklist" : "清单",
-   "content" : "目录",
+   "content" : "内容",
    "coursefile" : "课程文件",
    "discuss" : "讨论",
    "dropbox" : "作业",
    "epobject" : "电子公文包",
    "form" : "表单模板",
-   "link_thumbnail" : "Link thumbnail",
+   "link_thumbnail" : "链接缩略图",
    "lti" : "外部学习工具",
    "news" : "公告",
    "open_in_fullscreen" : "在全屏模式下打开",
@@ -28,6 +29,8 @@
    "selfassess" : "自我评估",
    "survey" : "调查",
    "undo" : "撤销",
+   "unstrusted_website" : "该媒体内容来自于一个不受信任的网站。",
+   "unstrusted_website_subtext" : "学员仍可以在新选项卡中对其进行访问。请与管理员联系将此源添加到您信任的网站。",
    "url" : "Url",
    "video_thumbnail" : "视频缩略图"
 }
